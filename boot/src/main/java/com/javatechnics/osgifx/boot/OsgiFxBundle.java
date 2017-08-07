@@ -24,6 +24,8 @@ public class OsgiFxBundle implements StageService {
 
     private static StageService stageService;
 
+    public static final String STARTING_JAVAFX_THREAD = "Starting JavaFx thread.";
+
     public OsgiFxBundle() {
         super();
     }
@@ -45,7 +47,7 @@ public class OsgiFxBundle implements StageService {
             Bootstrap.startMe();
 
         }).start();
-        Logger.getLogger("com.javatechnics.osgifx").log(Level.INFO, "Starting JavaFx thread.");
+        Logger.getLogger("com.javatechnics.osgifx").log(Level.INFO, STARTING_JAVAFX_THREAD);
     }
 
     /**
@@ -64,7 +66,7 @@ public class OsgiFxBundle implements StageService {
      * Called by the Bootstrap class once the JavaFX thread has been started (and on the JavaFx thread).
      * @param primaryStage the JavaFX Stage object.
      */
-    public static void setStage(Stage primaryStage)
+    static void setStage(Stage primaryStage)
     {
         ClassLoader currentClassLoader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(OsgiFxBundle.class.getClassLoader());

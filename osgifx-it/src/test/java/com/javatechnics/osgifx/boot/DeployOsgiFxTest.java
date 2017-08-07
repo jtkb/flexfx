@@ -1,7 +1,8 @@
 package com.javatechnics.osgifx.boot;
 
 import com.javatechnics.osgifx.OsgiFxTestConstants;
-import junit.framework.TestCase;
+import com.javatechnics.osgifx.stage.StageService;
+import javafx.stage.Stage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -10,11 +11,10 @@ import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.karaf.options.LogLevelOption;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
-import org.osgi.framework.BundleContext;
-import org.osgi.service.log.LogService;
 
 import javax.inject.Inject;
 
+import static org.junit.Assert.assertNotNull;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
@@ -24,10 +24,7 @@ import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 public class DeployOsgiFxTest {
 
     @Inject
-    protected BundleContext bundleContext;
-
-    @Inject
-    private LogService logService;
+    protected StageService stageService;
 
     @Configuration
     public static Option[] configuration() throws Exception {
@@ -44,10 +41,17 @@ public class DeployOsgiFxTest {
     }
 
     @Test
-    public void testBundleDeployed() {
-        TestCase.assertNotNull(bundleContext);
-        TestCase.assertNotNull(logService);
-
-
+    public void testStageServiceAvailable()
+    {
+        assertNotNull("Stage service is NULL", stageService);
     }
+
+    @Test
+    public void testObtainingStage()
+    {
+        assertNotNull("Stage service is NULL", stageService);
+        final Stage stage = stageService.getStage();
+        assertNotNull("Stage object is NULL", stage);
+    }
+
 }

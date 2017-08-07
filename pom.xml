@@ -4,11 +4,22 @@
     <groupId>com.javatechnics.osgifx</groupId>
     <artifactId>osgifx</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>OsgiFx</name>
+
     <modules>
         <module>parent</module>
         <module>boot</module>
-        <module>osgifx-it</module>
     </modules>
-    <packaging>pom</packaging>
-    <name>OsgiFx</name>
+    <profiles>
+        <profile>
+            <id>integration</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>osgifx-it</module>
+            </modules>
+        </profile>
+    </profiles>
 </project>
