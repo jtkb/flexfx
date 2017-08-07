@@ -33,6 +33,12 @@ public class OsgiFxBundle implements StageService {
      */
     public void startBundle()
     {
+        /*
+        Bootstrap.startMe() must be called from another thread with it's context class loader set to that of
+        this class. The class loader is required because Application.launch() method calls the classloader of the calling
+        thread (not the class!). Start in another thread is also required otherwise an unexpected exception is thrown
+        from further down in the JavaFX core code. (reason not fully understood at this time).
+         */
         Executors.defaultThreadFactory().newThread(() ->
         {
             Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
@@ -42,6 +48,9 @@ public class OsgiFxBundle implements StageService {
         Logger.getLogger("com.javatechnics.osgifx").log(Level.INFO, "Starting JavaFx thread.");
     }
 
+    /**
+     * Called by the Blueprint manager to stop the bundle. Un-registers the stage service.
+     */
     public void stopBundle()
     {
         if (stageServiceRegistration != null)
@@ -52,8 +61,7 @@ public class OsgiFxBundle implements StageService {
     }
 
     /**
-     * Called by the JavaFXBootstrap class once the JavaFX thread has been started and Stage object is
-     * available.
+     * Called by the Bootstrap class once the JavaFX thread has been started (and on the JavaFx thread).
      * @param primaryStage the JavaFX Stage object.
      */
     public static void setStage(Stage primaryStage)
