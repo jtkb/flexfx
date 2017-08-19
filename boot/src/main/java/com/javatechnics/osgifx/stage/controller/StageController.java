@@ -1,8 +1,11 @@
 package com.javatechnics.osgifx.stage.controller;
 
 import com.javatechnics.osgifx.scene.SceneService;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.osgi.framework.*;
+
+import java.io.IOException;
 
 public class StageController implements ServiceListener
 {
@@ -32,6 +35,12 @@ public class StageController implements ServiceListener
         switch (serviceEvent.getType())
         {
             case ServiceEvent.REGISTERED:
+                BundleContext context = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
+                try {
+                    Scene scene = context.getService((ServiceReference<SceneService>)serviceEvent.getServiceReference()).getScene();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 break;
             case ServiceEvent.MODIFIED:
                 break;
