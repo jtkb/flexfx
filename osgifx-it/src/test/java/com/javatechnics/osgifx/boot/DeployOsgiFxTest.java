@@ -1,9 +1,7 @@
 package com.javatechnics.osgifx.boot;
 
 import com.javatechnics.osgifx.OsgiFxTestConstants;
-import com.javatechnics.osgifx.stage.StageService;
-import javafx.stage.Stage;
-import org.junit.Test;
+import org.apache.karaf.features.BootFinished;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
@@ -14,7 +12,6 @@ import org.ops4j.pax.exam.spi.reactors.PerClass;
 
 import javax.inject.Inject;
 
-import static org.junit.Assert.assertNotNull;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
@@ -24,7 +21,7 @@ import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 public class DeployOsgiFxTest {
 
     @Inject
-    protected StageService stageService;
+    protected BootFinished bootFinished;
 
     @Configuration
     public static Option[] configuration() throws Exception {
@@ -38,20 +35,6 @@ public class DeployOsgiFxTest {
                                 .versionAsInProject(),
                         logLevel(LogLevelOption.LogLevel.INFO)
                 };
-    }
-
-    @Test
-    public void testStageServiceAvailable()
-    {
-        assertNotNull("Stage service is NULL", stageService);
-    }
-
-    @Test
-    public void testObtainingStage()
-    {
-        assertNotNull("Stage service is NULL", stageService);
-        final Stage stage = stageService.getStage();
-        assertNotNull("Stage object is NULL", stage);
     }
 
 }

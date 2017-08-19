@@ -22,7 +22,8 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Export-Package>com.javatechnics.osgifx.stage</Export-Package>
+                        <Export-Package>com.javatechnics.osgifx.scene,
+                                        com.javatechnics.osgifx.node</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
