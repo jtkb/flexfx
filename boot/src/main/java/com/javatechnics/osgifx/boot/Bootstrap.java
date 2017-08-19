@@ -33,7 +33,7 @@ public class Bootstrap extends Application {
                 Bootstrap.launch();
             } catch (IllegalStateException exception) {
                 // Catch the exception here - perhaps log - the JavaFX main thread has already been started?
-                System.out.println(exception);
+                System.out.println(exception.getMessage());
             }
         }
         else
