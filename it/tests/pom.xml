@@ -9,7 +9,7 @@
 
     <artifactId>tests</artifactId>
 
-    <name>tests</name>
+    <name>it-tests</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

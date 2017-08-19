@@ -10,7 +10,7 @@
     <artifactId>dummy</artifactId>
     <packaging>bundle</packaging>
 
-    <name>dummy</name>
+    <name>it-dummy</name>
     <url>http://maven.apache.org</url>
 
     <properties>

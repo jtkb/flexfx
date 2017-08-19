@@ -11,7 +11,7 @@
     <artifactId>boot</artifactId>
     <packaging>bundle</packaging>
 
-    <name>OsgiFx Boot</name>
+    <name>boot</name>
 
     <build>
         <plugins>

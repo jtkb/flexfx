@@ -3,7 +3,7 @@ package com.javatechnics.osgifx.boot;
 import org.apache.karaf.features.BootFinished;
 import org.apache.karaf.shell.api.console.Session;
 import org.apache.karaf.shell.api.console.SessionFactory;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,7 +83,24 @@ public class DeployOsgiFxTest {
                 break;
             }
         }
-        Assert.assertNotNull(dummyBundle);
+        assertNotNull(dummyBundle);
+    }
+
+    @Test
+    public void testOsgiFxInstalled()
+    {
+        Bundle osgiFxBundle = null;
+        for (Bundle bundle : bundleContext.getBundles() )
+        {
+            if (bundle.getSymbolicName() != null && bundle.getSymbolicName().equals(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID))
+            {
+                osgiFxBundle = bundle;
+                break;
+            }
+        }
+
+        assertNotNull(osgiFxBundle);
+        assertEquals(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID + " is not active.", Bundle.ACTIVE, osgiFxBundle.getState());
     }
 
 }
