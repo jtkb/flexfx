@@ -1,14 +1,9 @@
 package com.javatechnics.osgifx.boot;
 
 import com.javatechnics.osgifx.stage.controller.StageController;
-import javafx.application.Platform;
 import javafx.stage.Stage;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.framework.ServiceRegistration;
 
-import java.util.Properties;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;

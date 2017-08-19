@@ -1,6 +1,5 @@
 package com.javatechnics.osgifx.boot;
 
-import com.javatechnics.osgifx.OsgiFxTestConstants;
 import org.apache.karaf.features.BootFinished;
 import org.apache.karaf.shell.api.console.Session;
 import org.apache.karaf.shell.api.console.SessionFactory;
@@ -18,7 +17,6 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import javax.inject.Inject;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
