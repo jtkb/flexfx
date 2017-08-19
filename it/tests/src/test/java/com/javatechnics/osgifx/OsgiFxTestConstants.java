@@ -14,7 +14,7 @@ public final class OsgiFxTestConstants {
 
     public static final String BUNDLE_INSTALL_ACL_CFG = "etc/org.apache.karaf.command.acl.bundle.cfg";
 
-    public static final String IT_DUMMY_BUNDLE_ARTIFACT_ID = "it-dummy";
+    public static final String IT_DUMMY_BUNDLE_ARTIFACT_ID = "dummy";
 
     public static final String PROJECT_VERSION = "1.0.0-SNAPSHOT";
 
