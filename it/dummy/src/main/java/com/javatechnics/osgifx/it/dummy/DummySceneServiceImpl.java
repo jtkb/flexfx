@@ -10,28 +10,31 @@ import java.io.IOException;
 
 public class DummySceneServiceImpl implements SceneService
 {
+    private Scene scene = null;
 
     @Override
     public Scene getScene() throws IOException
     {
-        ClassLoader ccl = Thread.currentThread().getContextClassLoader();
-        Parent parent;
-        try {
-            Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
-            FXMLLoader loader = new FXMLLoader(DummyPanelController.class.getResource("DummyPanel.fxml"));
-            parent = loader.load();
-            // To get the controller:
-            // DummyPanelController dpc = loader.getController();
+        if (scene == null) {
+            ClassLoader ccl = Thread.currentThread().getContextClassLoader();
+            Parent parent;
+            try {
+                Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+                FXMLLoader loader = new FXMLLoader(DummyPanelController.class.getResource("DummyPanel.fxml"));
+                parent = loader.load();
+                scene = new Scene(parent);
+                // To get the controller:
+                // DummyPanelController dpc = loader.getController();
+            } finally {
+                Thread.currentThread().setContextClassLoader(ccl);
+            }
         }
-        finally {
-            Thread.currentThread().setContextClassLoader(ccl);
-        }
-        return new Scene(parent);
+        return scene;
 
     }
 
     @Override
     public StageStyle getPreferredStageStyle() {
-        return StageStyle.DECORATED;
+        return StageStyle.UNDECORATED;
     }
 }

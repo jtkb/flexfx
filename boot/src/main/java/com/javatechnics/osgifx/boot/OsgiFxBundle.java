@@ -48,12 +48,11 @@ public class OsgiFxBundle
     /**
      * Called by the Blueprint manager to stop the bundle. Un-registers the stage service.
      */
-    public void stopBundle()
-    {
+    public void stopBundle() {
         if (stageController != null) {
             stageController.stop();
             stageController = null;
-            Logger.getLogger(LOGGER_NAME).log(Level.INFO,"Stopped StageController");
+            Logger.getLogger(LOGGER_NAME).log(Level.INFO, "Stopped StageController");
         }
     }
 
@@ -61,15 +60,16 @@ public class OsgiFxBundle
      * Called by the Bootstrap class once the JavaFX thread has been started (and on the JavaFx thread).
      *
      * @param primaryStage the JavaFX Stage object.
+     * @param isFxThreadRestart
      */
-    static void setStage(Stage primaryStage) {
+    static void setStage(Stage primaryStage, final boolean isFxThreadRestart) {
         ClassLoader currentClassLoader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(OsgiFxBundle.class.getClassLoader());
         OsgiFxBundle.primaryStage = primaryStage;
 
         stageController = new StageController(primaryStage);
         try {
-            stageController.start();
+            stageController.start(isFxThreadRestart);
             Logger.getLogger(LOGGER_NAME).log(Level.INFO, "Started StageController.");
         } catch (InvalidSyntaxException e) {
             Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, e.getMessage());
