@@ -21,7 +21,7 @@ public class StageController implements ServiceListener
     private final Stage primaryStage;
 
     private boolean isFxThreadRestart = true;
-    private boolean hasBeenvisible = false;
+    private boolean hasBeenVisible = false;
     private final Object serviceListenerLock = new Object();
 
     public StageController(final Stage primaryStage) {
@@ -89,11 +89,11 @@ public class StageController implements ServiceListener
                 if (primaryStage.getScene() == null)
                 {
                     primaryStage.setScene(scene);
-                    if (!isFxThreadRestart && !hasBeenvisible) {
+                    if (!isFxThreadRestart && !hasBeenVisible) {
                         primaryStage.initStyle(stageStyle);
                     }
                     primaryStage.show();
-                    hasBeenvisible = true;
+                    hasBeenVisible = true;
                 }
             });
         } catch (IOException e) {

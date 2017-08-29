@@ -2,6 +2,7 @@ package com.javatechnics.osgifx.it.dummy;
 
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.shape.Circle;
 
 public class DummyPanelController
@@ -15,6 +16,9 @@ public class DummyPanelController
 
     @FXML
     Circle circle3;
+
+    @FXML
+    Button button;
 
     public DummyPanelController() {
     }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
@@ -11,6 +12,7 @@
             <Circle fx:id="circle1" fill="DODGERBLUE" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="211.0" layoutY="117.0" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="circle2" blendMode="EXCLUSION" fill="#ff1f32" layoutX="318.0" layoutY="163.0" opacity="0.49" radius="100.0" stroke="BLACK" strokeType="INSIDE" />
+            <Button fx:id="button" layoutX="-86.0" layoutY="217.0" mnemonicParsing="false" text="Button" />
          </children>
       </Group>
    </children>
