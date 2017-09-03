@@ -1,0 +1,20 @@
+@startuml
+
+interface SceneService
+interface NodeService
+interface ServiceListener
+interface StageManagement
+
+class OsgiFxBundle
+class Bootstrap
+class StageController
+
+OsgiFxBundle "1" -- "1" Bootstrap
+OsgiFxBundle "1" *-- "1" StageController
+ServiceListener <|-- StageController
+StageController "1" o-- "0..*" StageManagement
+StageController "1" o-- "0..*" SceneService
+SceneService "1" o-- "0..*" NodeService
+
+
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+OsgiFxBundle -> Executor
+note left
+OsgiFxBundle called
+by the OSGi
+implementation
+end note
+Executor -> Bootstrap : startMe()
+Bootstrap -> Application : launch()
+...Undetermined time to start JavaFX thread...
+Bootstrap <-- Application : start(Stage)
+OsgiFxBundle <-- Bootstrap : setStage(Stage)
+OsgiFxBundle -> StageController : start()
+StageController -> BundleContext : getServiceReference()
+StageController <-- BundleContext
+StageController -> BundleContext : registerServiceListener()
+@enduml
