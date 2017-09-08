@@ -208,6 +208,9 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
+/**
+ * Bundle private class that starts the JavaFx thread, returning the Stage object to the OSGi visible calling class.
+ */
 public class Bootstrap extends Application {
 
     private static Stage primaryStage;

@@ -217,5 +217,6 @@
     <modules>
         <module>tests</module>
         <module>dummy</module>
+        <module>dummytwo</module>
     </modules>
 </project>

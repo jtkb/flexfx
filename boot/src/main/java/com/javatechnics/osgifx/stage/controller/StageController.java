@@ -215,6 +215,13 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * A bundle private class that controls access to the Stage object.
+ * This class is instantiated after the JavaFx has been started and registers a listener of
+ * {@link com.javatechnics.osgifx.scene.SceneService}. This is done to prevent uncontrolled access to the Stage object.
+ * Currently the controller accepts the first SceneService that it receives but future revisions will make use of
+ * {@link com.javatechnics.osgifx.stage.management.StageManager} objects for add security.
+ */
 public class StageController implements ServiceListener
 {
     // SceneService filter

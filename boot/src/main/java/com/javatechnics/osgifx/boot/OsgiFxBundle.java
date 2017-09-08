@@ -213,7 +213,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * This is the created by the OSGi framework via blueprint and triggers the starting of the JavaFx thread.
  */
 public class OsgiFxBundle
 {
@@ -264,7 +264,7 @@ public class OsgiFxBundle
      * Called by the Bootstrap class once the JavaFX thread has been started (and on the JavaFx thread).
      *
      * @param primaryStage the JavaFX Stage object.
-     * @param isFxThreadRestart
+     * @param isFxThreadRestart indicates if the JavaFx thread has already been started.
      */
     static void setStage(Stage primaryStage, final boolean isFxThreadRestart) {
         ClassLoader currentClassLoader = Thread.currentThread().getContextClassLoader();

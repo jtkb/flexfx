@@ -230,6 +230,7 @@ import java.util.concurrent.TimeoutException;
 import static com.javatechnics.osgifx.OsgiFxTestConstants.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 import static org.testfx.api.FxAssert.verifyThat;
@@ -287,15 +288,7 @@ public class TFxTest
     @Test
     public void testOsgiFxInstalled()
     {
-        Bundle osgiFxBundle = null;
-        for (Bundle bundle : bundleContext.getBundles() )
-        {
-            if (bundle.getSymbolicName() != null && bundle.getSymbolicName().equals(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID))
-            {
-                osgiFxBundle = bundle;
-                break;
-            }
-        }
+        final Bundle osgiFxBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
         assertNotNull(osgiFxBundle);
         assertEquals(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID + " is not active.", Bundle.ACTIVE, osgiFxBundle.getState());
     }
@@ -317,6 +310,47 @@ public class TFxTest
     public void testButtonAvailable()
     {
         verifyThat("#button", hasText("Button"));
+    }
+
+    /**
+     * Ensures that if a second SceneService is deployed, that is it not loaded into the Stage.
+     */
+    @Test
+    public void testSecondSceneServiceNotSelected() throws Exception
+    {
+        final String installDummyBundleTwoCommand ="bundle:install mvn:"
+                + OSGIFX_GROUP_ID + "/"
+                + DUMMY_TWO_BUNDLE_ARTIFACT_ID + "/"
+                + PROJECT_VERSION;
+        // Ensure the dummy bundle two is not installed.
+        Bundle dummyTwoBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + DUMMY_TWO_BUNDLE_ARTIFACT_ID);
+        assertNull("Dummy Bundle Two found to be already deployed.", dummyTwoBundle);
+
+        session.execute(installDummyBundleTwoCommand);
+
+        dummyTwoBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + DUMMY_TWO_BUNDLE_ARTIFACT_ID);
+        assertNotNull("Dummy Bundle Two was not installed.", dummyTwoBundle);
+        if (dummyTwoBundle.getState() != Bundle.ACTIVE)
+        {
+            dummyTwoBundle.start();
+        }
+        assertEquals("Dummy Two bundle not active.", Bundle.ACTIVE, dummyTwoBundle.getState());
+        dummyTwoBundle.uninstall();
+
+    }
+
+    private Bundle getInstalledBundle(final String bundleSymbolicName)
+    {
+        Bundle installedBundle = null;
+        for (Bundle bundle : bundleContext.getBundles())
+        {
+            if (bundle.getSymbolicName() != null && bundle.getSymbolicName().equals(bundleSymbolicName))
+            {
+                installedBundle = bundle;
+                break;
+            }
+        }
+        return installedBundle;
     }
 
 }

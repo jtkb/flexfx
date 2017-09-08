@@ -204,6 +204,9 @@
 
 package com.javatechnics.osgifx.node;
 
+/**
+ * Bundles should implement this service it they offer Node objects that can be loaded into a Scene object.
+ */
 public interface NodeService
 {
 }
