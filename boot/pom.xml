@@ -227,7 +227,8 @@
                 <configuration>
                     <instructions>
                         <Export-Package>com.javatechnics.osgifx.scene,
-                                        com.javatechnics.osgifx.node</Export-Package>
+                                        com.javatechnics.osgifx.node,
+                                        com.javatechnics.osgifx.util</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

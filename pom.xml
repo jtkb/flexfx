@@ -214,7 +214,6 @@
     <modules>
         <module>parent</module>
         <module>boot</module>
-        <module>examples</module>
     </modules>
     <profiles>
         <profile>
@@ -224,6 +223,15 @@
             </activation>
             <modules>
                 <module>it</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>examples</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <modules>
+                <module>examples</module>
             </modules>
         </profile>
     </profiles>

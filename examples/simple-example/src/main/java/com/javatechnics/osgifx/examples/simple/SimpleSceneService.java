@@ -1,6 +1,7 @@
 package com.javatechnics.osgifx.examples.simple;
 
 import com.javatechnics.osgifx.scene.SceneService;
+import com.javatechnics.osgifx.util.Utils;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
@@ -8,6 +9,37 @@ import java.io.IOException;
 
 public class SimpleSceneService implements SceneService
 {
+    /**
+     * Loads the bundle-private FXML file and places it inside a Scene object. To deal with the boiler-plate
+     * ClassLoader switching this implementation takes advantage of the {@link com.javatechnics.osgifx.util.Utils}
+     * SceneLoader functional interface implementation.
+     * @return a Scene object populated with inflated FXML file.
+     * @throws IOException thrown if the FXML file cannot be found.
+     */
+    @Override
+    public Scene getScene() throws IOException
+    {
+        return Utils.sceneLoader.loadScene(this.getClass(), SimpleExampleController.SIMPLE_EXAMPLE_FXML_FILE);
+    }
+
+    /*
+    An alternative could be to have a separate initialise method called upon bundle activation. The advantage of this
+    is that it would allow the bundle to fail-fast rather than at the point when the service is used as might be the
+    case if the specified FXML file cannot be found.
+
+    public void initialise() throws IOException
+    {
+        scene = Utils.sceneLoader.loadScene(this.getClass(), SimpleExampleController.SIMPLE_EXAMPLE_FXML_FILE);
+    }
+    */
+
+    //==================================================================================================================
+
+    /*
+    What follows below is NOT the recommended way to create a Scene service which has been completed with a Parent node
+    loaded from an FXML file. The reason it is not recommended is because it MUST switch class loaders due to the nature
+    of OSGi.
+
     @Override
     public Scene getScene() throws IOException {
         final ClassLoader ccl = Thread.currentThread().getContextClassLoader();
@@ -20,5 +52,5 @@ public class SimpleSceneService implements SceneService
             Thread.currentThread().setContextClassLoader(ccl);
         }
         return scene;
-    }
+    }*/
 }

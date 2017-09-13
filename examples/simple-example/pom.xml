@@ -30,6 +30,26 @@
                     </instructions>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.karaf.tooling</groupId>
+                <artifactId>karaf-maven-plugin</artifactId>
+                <version>4.0.7</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>features-generate-descriptor</goal>
+                        </goals>
+                        <configuration>
+                            <outputFile>target/features.xml</outputFile>
+                            <includeProjectArtifact>true</includeProjectArtifact>
+                            <excludedArtifactIds>org.osgi.core,org.osgi.compendium</excludedArtifactIds>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
