@@ -40,8 +40,14 @@ public class SimpleExampleController
     @FXML
     private TextArea textArea;
 
-    
-
-
-
+    /**
+     * Called by the JavaFx runtime automatically.
+     */
+    public void initialize()
+    {
+        greetButton.setOnAction(event -> textArea.appendText(Quotes.GREET + "\n"));
+        randomButton.setOnAction(event -> textArea.appendText(Quotes.RANDOM_QUOTE + "\n"));
+        quoteButton.setOnAction(event -> textArea.appendText(Quotes.WELL_KNOWN_QUOTE + "\n"));
+        farewellButton.setOnAction(event -> textArea.appendText(Quotes.FAREWELL + "\n"));
+    }
 }

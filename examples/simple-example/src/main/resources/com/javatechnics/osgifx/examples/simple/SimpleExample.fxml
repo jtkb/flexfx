@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <!--
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -29,17 +28,17 @@
    <children>
       <HBox layoutX="14.0" layoutY="14.0" prefHeight="378.0" prefWidth="578.0">
          <children>
-            <TextArea prefHeight="378.0" prefWidth="483.0" />
+            <TextArea fx:id="textArea" prefHeight="378.0" prefWidth="483.0" />
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                  <Button mnemonicParsing="false" text="Greet" />
+                  <Button fx:id="greetButton" mnemonicParsing="false" text="Greet" />
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                  <Button mnemonicParsing="false" text="Random" />
+                  <Button fx:id="randomButton" mnemonicParsing="false" text="Random" />
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                  <Button mnemonicParsing="false" text="Quote" />
+                  <Button fx:id="quoteButton" mnemonicParsing="false" text="Quote" />
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
-                  <Button mnemonicParsing="false" text="Farewell" />
+                  <Button fx:id="farewellButton" mnemonicParsing="false" text="Farewell" />
                   <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
                </children>
             </VBox>
