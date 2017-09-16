@@ -21,6 +21,7 @@ import javafx.scene.Parent;
 
 import java.io.IOException;
 
+@FunctionalInterface
 public interface ParentLoader
 {
     /**

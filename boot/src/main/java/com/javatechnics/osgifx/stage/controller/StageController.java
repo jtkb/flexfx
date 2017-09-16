@@ -53,6 +53,13 @@ public class StageController implements ServiceListener
 
     }
 
+    /**
+     * Called by the bundle activator once it has been notified by the JavaFx boot class that the JavaFx thread
+     * has been started.
+     * @param isFxThreadRestart indicates if the JavaFx thread has already been started due to a previous bundle
+     *                          start-up cycle.
+     * @throws InvalidSyntaxException thrown if the service filter is of the incorrect syntax.
+     */
     public void start(final boolean isFxThreadRestart) throws InvalidSyntaxException {
         BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
         this.isFxThreadRestart = isFxThreadRestart;
@@ -68,6 +75,10 @@ public class StageController implements ServiceListener
         }
     }
 
+    /**
+     * Called by the OSGi coordinating class when the stage object is to be no longer used e.g. framework shutdown.
+     * The primary reason for this method is to allow for the clean up of resources.
+     */
     public void stop() {
         BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass()).getBundleContext();
         bundleContext.removeServiceListener(this);
@@ -80,6 +91,11 @@ public class StageController implements ServiceListener
         });
     }
 
+    /**
+     * Service notification interface that has filtering applied; Only services of type
+     * {@link com.javatechnics.osgifx.scene.SceneService} are notified via this interface.
+     * @param serviceEvent the event for a specific SceneService.
+     */
     @Override
     public void serviceChanged(final ServiceEvent serviceEvent) {
 
@@ -103,6 +119,15 @@ public class StageController implements ServiceListener
         }
     }
 
+    /**
+     * Called internally when a SceneService object is available. This implementation currently uses the first
+     * SceneService object it receives to populate the Stage. Future development will include reference to a StageManager
+     * class to give indication as to which SceneService (and hence Scene) to select. As the SceneService notification
+     * occurs on an OSGi thread and the Scene object must bet set (into the Stage) on the JavaFx thread there is the
+     * small possibility that the service could be withdrawn before the Scene is used.
+     * @param context the BundleContext used to obtain the SceneService object.
+     * @param sceneServiceReference service reference for the SceneService instance.
+     */
     private void launchScene(final BundleContext context, final ServiceReference<SceneService> sceneServiceReference)
     {
         try {
@@ -126,6 +151,13 @@ public class StageController implements ServiceListener
 
     }
 
+    /**
+     * Called internally when a SceneService object is being withdrawn. Currently this method removes the scene if it is
+     * currently set in the Stage but does not replace it with another. Future development will make reference to a
+     * StageManager object.
+     * @param context the BundleContext used to obtain the specific SceneService.
+     * @param sceneServiceServiceReference reference to the specific SceneService.
+     */
     private void removeScene(final BundleContext context, final ServiceReference<SceneService> sceneServiceServiceReference)
     {
         try {

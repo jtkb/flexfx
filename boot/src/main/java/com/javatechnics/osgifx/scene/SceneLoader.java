@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 
 import java.io.IOException;
 
+@FunctionalInterface
 public interface SceneLoader
 {
     /**
