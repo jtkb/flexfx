@@ -41,7 +41,8 @@
                     <instructions>
                         <Export-Package>com.javatechnics.osgifx.scene,
                                         com.javatechnics.osgifx.node,
-                                        com.javatechnics.osgifx.util</Export-Package>
+                                        com.javatechnics.osgifx.util,
+                                        com.javatechnics.osgifx.platform</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

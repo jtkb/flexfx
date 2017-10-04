@@ -15,14 +15,11 @@
  *    @author Kerry Billingham
  */
 
-package com.javatechnics.osgifx.node;
+package com.javatechnics.osgifx.platform;
 
-import javafx.scene.Parent;
-
-/**
- * Bundles should implement this service it they offer Node objects that can be loaded into a Scene object.
- */
-public interface NodeService
+@FunctionalInterface
+public interface Toolkit
 {
-    Parent getParentNode();
+    Boolean isReady();
+
 }

@@ -29,6 +29,7 @@
     <name>examples</name>
     <modules>
         <module>simple-example</module>
+        <module>basic-node-service</module>
     </modules>
     <dependencies>
         <dependency>

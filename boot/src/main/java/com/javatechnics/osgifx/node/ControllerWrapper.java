@@ -20,9 +20,28 @@ package com.javatechnics.osgifx.node;
 import javafx.scene.Parent;
 
 /**
- * Bundles should implement this service it they offer Node objects that can be loaded into a Scene object.
+ * Immutable class that contains the parent node specified in an FXML file and its associated controller.
+ * @param <T> the controller type.
  */
-public interface NodeService
+public final class  ControllerWrapper <T>
 {
-    Parent getParentNode();
+    final T controller;
+
+    final Parent parent;
+
+    public ControllerWrapper(final T controller, final Parent parent)
+    {
+        this.controller = controller;
+        this.parent = parent;
+    }
+
+    public T getController()
+    {
+        return controller;
+    }
+
+    public Parent getParent()
+    {
+        return parent;
+    }
 }

@@ -17,11 +17,16 @@
 
 package com.javatechnics.osgifx.util;
 
+import com.javatechnics.osgifx.node.ControllerLoaderTwo;
+import com.javatechnics.osgifx.node.ControllerWrapper;
 import com.javatechnics.osgifx.node.ParentLoader;
 import com.javatechnics.osgifx.scene.SceneLoader;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
+import java.io.IOException;
+import java.util.function.BiFunction;
 
 /**
  * Utility class.
@@ -30,16 +35,18 @@ public final class Utils
 {
     /**
      * Creates a Parent node by inflating the specified FXML file.
-     * This also
+     * This also handles the switching of the class loader.
      */
     public static final ParentLoader parentLoader = (clazz, fxmlFile) ->
     {
         final ClassLoader oldClassLoader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(clazz.getClassLoader());
         Parent parent = null;
-        try {
+        try
+        {
             parent = FXMLLoader.load(clazz.getResource(fxmlFile));
-        } finally {
+        } finally
+        {
             Thread.currentThread().setContextClassLoader(oldClassLoader);
         }
         return parent;
@@ -50,5 +57,34 @@ public final class Utils
      * It calls through to the parentLoader instance which handles the switching of the Class Loader.
      */
     public static SceneLoader sceneLoader = (clazz, fxmlFile) -> new Scene(Utils.parentLoader.loadParent(clazz, fxmlFile));
+
+    /**
+     * Inflates the specified FXML file returning the parent node and controller class in an immutable object.
+     *
+     * @param clazz    The controller class specified in the FXML file.
+     * @param fxmlFile the specified FXML file to load and inflate.
+     * @param <T>      The controller type as specified in the FXML file.
+     * @return ControllerWrapper containing the controller and parent node.
+     * @throws IOException thrown if the specified FXML file cannot be found.
+     */
+    public static <T> ControllerWrapper<T> getWrapper(Class<T> clazz, String fxmlFile) throws IOException, ClassCastException
+    {
+        ControllerWrapper<T> wrapper = null;
+        ClassLoader ccl = Thread.currentThread().getContextClassLoader();
+        try
+        {
+            Thread.currentThread().setContextClassLoader(clazz.getClassLoader());
+            FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlFile));
+            Parent parentNode = loader.load();
+            //TODO: Is this class loader switch required here?
+            Thread.currentThread().setContextClassLoader(ccl);
+            wrapper = new ControllerWrapper(clazz.cast(loader.getController()), parentNode);
+        } finally
+        {
+            Thread.currentThread().setContextClassLoader(ccl);
+        }
+
+        return wrapper;
+    }
 
 }

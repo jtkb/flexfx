@@ -17,12 +17,10 @@
 
 package com.javatechnics.osgifx.node;
 
-import javafx.scene.Parent;
+import java.io.IOException;
 
-/**
- * Bundles should implement this service it they offer Node objects that can be loaded into a Scene object.
- */
-public interface NodeService
+@FunctionalInterface
+public interface ControllerLoader <T>
 {
-    Parent getParentNode();
+     ControllerWrapper<T> loadControllerWrapper(Class<T> clazz, String fxmlFile) throws IOException;
 }
