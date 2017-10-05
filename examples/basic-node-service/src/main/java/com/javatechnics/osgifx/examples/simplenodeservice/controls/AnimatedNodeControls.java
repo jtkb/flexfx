@@ -19,8 +19,7 @@ package com.javatechnics.osgifx.examples.simplenodeservice.controls;
 
 import com.javatechnics.osgifx.node.ControllerWrapper;
 import com.javatechnics.osgifx.node.NodeService;
-import com.javatechnics.osgifx.platform.Toolkit;
-import com.javatechnics.osgifx.util.Utils;
+import com.javatechnics.osgifx.util.UtilityService;
 import javafx.scene.Parent;
 import javafx.scene.layout.AnchorPane;
 import org.osgi.service.event.Event;
@@ -44,9 +43,11 @@ public class AnimatedNodeControls implements NodeService, ControlsCallback
 
     private AnchorPane parentNode = null;
 
+    private AnimatedControlsController animatedNodeController = null;
+
     private EventAdmin eventAdmin = null;
 
-    private Toolkit toolkitService = null;
+    private UtilityService utilityService = null;
 
     private ControlsCallback controlsCallback = (NodeEvent nodeEvent, Object value) ->
     {
@@ -85,11 +86,13 @@ public class AnimatedNodeControls implements NodeService, ControlsCallback
 
     }
 
-    public void initialise() throws IOException
+    public void initialise() throws IOException, NoSuchFieldException, IllegalAccessException
     {
-        ControllerWrapper<AnimatedControlsController> wrapper = Utils.getWrapper(AnimatedControlsController.class, AnimatedControlsController.FXML_FILE);
+        ControllerWrapper<AnimatedControlsController> wrapper = new ControllerWrapper<>(AnimatedControlsController.class);
+        utilityService.populateWrapper(wrapper, AnimatedNodeControls.FXML_FILE);
         parentNode = (AnchorPane) wrapper.getParent();
-        wrapper.getController().setControlsCallback(controlsCallback);
+        animatedNodeController = wrapper.getController();
+        animatedNodeController.setControlsCallback(controlsCallback);
     }
 
     public void setEventAdmin(final EventAdmin eventAdmin)
@@ -97,8 +100,8 @@ public class AnimatedNodeControls implements NodeService, ControlsCallback
         this.eventAdmin = eventAdmin;
     }
 
-    public void setToolkitService(final Toolkit utilsService)
+    public void setUtilityService(final UtilityService utilityService)
     {
-        this.toolkitService = utilsService;
+        this.utilityService = utilityService;
     }
 }

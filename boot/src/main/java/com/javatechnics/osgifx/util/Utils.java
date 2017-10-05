@@ -17,7 +17,6 @@
 
 package com.javatechnics.osgifx.util;
 
-import com.javatechnics.osgifx.node.ControllerLoaderTwo;
 import com.javatechnics.osgifx.node.ControllerWrapper;
 import com.javatechnics.osgifx.node.ParentLoader;
 import com.javatechnics.osgifx.scene.SceneLoader;
@@ -26,7 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import java.io.IOException;
-import java.util.function.BiFunction;
+import java.lang.reflect.Field;
 
 /**
  * Utility class.
@@ -67,24 +66,28 @@ public final class Utils
      * @return ControllerWrapper containing the controller and parent node.
      * @throws IOException thrown if the specified FXML file cannot be found.
      */
-    public static <T> ControllerWrapper<T> getWrapper(Class<T> clazz, String fxmlFile) throws IOException, ClassCastException
+    public static <T> ControllerWrapper<T> getWrapper(Class<T> clazz, String fxmlFile) throws IOException, ClassCastException, NoSuchFieldException, IllegalAccessException
     {
         ControllerWrapper<T> wrapper = null;
         ClassLoader ccl = Thread.currentThread().getContextClassLoader();
         try
         {
             Thread.currentThread().setContextClassLoader(clazz.getClassLoader());
+            final Field controllerField = wrapper.getClass().getDeclaredField(ControllerWrapper.CONTROLLER_FIELD_NAME);
+            controllerField.setAccessible(true);
+            final Field parentNodeField = wrapper.getClass().getDeclaredField(ControllerWrapper.NODE_FIELD_NAME);
+            parentNodeField.setAccessible(true);
             FXMLLoader loader = new FXMLLoader(clazz.getResource(fxmlFile));
             Parent parentNode = loader.load();
-            //TODO: Is this class loader switch required here?
-            Thread.currentThread().setContextClassLoader(ccl);
-            wrapper = new ControllerWrapper(clazz.cast(loader.getController()), parentNode);
-        } finally
+            wrapper = new ControllerWrapper<>(clazz);
+            controllerField.set(wrapper, wrapper.getControllerClass().cast(loader.getController()));
+            parentNodeField.set(wrapper, parentNode);
+        }
+        finally
         {
             Thread.currentThread().setContextClassLoader(ccl);
         }
 
         return wrapper;
     }
-
 }

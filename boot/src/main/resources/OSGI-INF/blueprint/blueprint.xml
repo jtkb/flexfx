@@ -23,4 +23,5 @@
 
     <bean id="javafxbundle" class="com.javatechnics.osgifx.boot.OsgiFxBundle" init-method="startBundle" scope="singleton"
           destroy-method="stopBundle"/>
+
 </blueprint>

@@ -19,20 +19,19 @@ package com.javatechnics.osgifx.examples.simplenodeservice.scene;
 
 import com.javatechnics.osgifx.node.ControllerWrapper;
 import com.javatechnics.osgifx.node.NodeService;
-import com.javatechnics.osgifx.platform.Toolkit;
 import com.javatechnics.osgifx.scene.SceneService;
-import com.javatechnics.osgifx.util.Utils;
+import com.javatechnics.osgifx.util.UtilityService;
 import javafx.scene.Scene;
 
 import java.io.IOException;
 
-public class AnimatedNodeSceneService <T> implements SceneService
+public class AnimatedNodeSceneService<T> implements SceneService
 {
     private Scene scene = null;
 
     private SceneServiceController sceneServiceController = null;
 
-    private Toolkit toolkitService = null;
+    private UtilityService utilityService = null;
 
     @Override
     public Scene getScene() throws IOException
@@ -43,9 +42,10 @@ public class AnimatedNodeSceneService <T> implements SceneService
     /**
      * Called by Blueprint manager.
      */
-    public void initialise() throws IOException
+    public void initialise() throws IOException, NoSuchFieldException, IllegalAccessException
     {
-        ControllerWrapper<SceneServiceController> wrapper = Utils.getWrapper(SceneServiceController.class, SceneServiceController.FXML_FILE);
+        ControllerWrapper<SceneServiceController> wrapper = new ControllerWrapper<SceneServiceController>(SceneServiceController.class);
+        utilityService.populateWrapper(wrapper, SceneServiceController.FXML_FILE);
         sceneServiceController = wrapper.getController();
         scene = new Scene(wrapper.getParent());
     }
@@ -63,8 +63,8 @@ public class AnimatedNodeSceneService <T> implements SceneService
         }
     }
 
-    public void setToolkitService(final Toolkit toolkitService)
+    public void setUtilityService(final UtilityService utilityService)
     {
-        this.toolkitService = toolkitService;
+        this.utilityService = utilityService;
     }
 }

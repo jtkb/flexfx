@@ -21,27 +21,38 @@ import javafx.scene.Parent;
 
 /**
  * Immutable class that contains the parent node specified in an FXML file and its associated controller.
+ *
  * @param <T> the controller type.
  */
-public final class  ControllerWrapper <T>
+public final class ControllerWrapper<T>
 {
-    final T controller;
+    public static final String CONTROLLER_FIELD_NAME = "controller";
 
-    final Parent parent;
+    public static final String NODE_FIELD_NAME = "parent";
 
-    public ControllerWrapper(final T controller, final Parent parent)
+    private T controller;
+
+    private Class<T> controllerClass = null;
+
+    private Parent parent;
+
+    public ControllerWrapper(final Class<T> controllerClass)
     {
-        this.controller = controller;
-        this.parent = parent;
+        this.controllerClass = controllerClass;
     }
 
-    public T getController()
+    public final T getController()
     {
         return controller;
     }
 
-    public Parent getParent()
+    public final Parent getParent()
     {
         return parent;
+    }
+
+    public Class<T> getControllerClass()
+    {
+        return controllerClass;
     }
 }

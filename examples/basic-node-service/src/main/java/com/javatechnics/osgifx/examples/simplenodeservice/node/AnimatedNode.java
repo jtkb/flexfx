@@ -20,8 +20,7 @@ package com.javatechnics.osgifx.examples.simplenodeservice.node;
 import com.javatechnics.osgifx.examples.simplenodeservice.controls.ControlsCallback;
 import com.javatechnics.osgifx.node.ControllerWrapper;
 import com.javatechnics.osgifx.node.NodeService;
-import com.javatechnics.osgifx.platform.Toolkit;
-import com.javatechnics.osgifx.util.Utils;
+import com.javatechnics.osgifx.util.UtilityService;
 import javafx.scene.Parent;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
@@ -32,7 +31,7 @@ public class AnimatedNode implements NodeService, EventHandler
 {
     private Parent parentNode = null;
     private AnimatedNodeController controller;
-    private Toolkit toolkitService = null;
+    private UtilityService utilityService = null;
 
     @Override
     public void handleEvent(final Event event)
@@ -54,15 +53,16 @@ public class AnimatedNode implements NodeService, EventHandler
         return parentNode;
     }
 
-    public void initialise() throws IOException
+    public void initialise() throws IOException, NoSuchFieldException, IllegalAccessException
     {
-        ControllerWrapper<AnimatedNodeController> wrapper = Utils.getWrapper(AnimatedNodeController.class, AnimatedNodeController.FXML_FILE);
+        ControllerWrapper<AnimatedNodeController> wrapper = new ControllerWrapper<>(AnimatedNodeController.class);
+        utilityService.populateWrapper(wrapper, AnimatedNodeController.FXML_FILE);
         parentNode = wrapper.getParent();
         controller = wrapper.getController();
     }
 
-    public void setToolkitService(final Toolkit toolkitService)
+    public void setUtilityService(final UtilityService utilityService)
     {
-        this.toolkitService = toolkitService;
+        this.utilityService = utilityService;
     }
 }

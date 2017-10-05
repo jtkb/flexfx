@@ -22,10 +22,11 @@
         xsi:schemaLocation='http://www.osgi.org/xmlns/blueprint/v1.0.0 https://osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd'>
 
     <reference id="toolkitservice" interface="com.javatechnics.osgifx.platform.Toolkit" />
+    <reference id="utilityservice" interface="com.javatechnics.osgifx.util.UtilityService" />
 
     <bean id="sceneservice" class="com.javatechnics.osgifx.examples.simplenodeservice.scene.AnimatedNodeSceneService"
           init-method="initialise" scope="singleton" >
-        <property name="toolkitService" ref="toolkitservice" />
+        <property name="utilityService" ref="utilityservice" />
     </bean>
 
     <service id="animatednodesceneservice" interface="com.javatechnics.osgifx.scene.SceneService"
@@ -37,7 +38,7 @@
 
     <bean id="animatednode" class="com.javatechnics.osgifx.examples.simplenodeservice.node.AnimatedNode" scope="singleton"
           init-method="initialise" activation="lazy">
-        <property name="toolkitService" ref="toolkitservice" />
+        <property name="utilityService" ref="utilityservice" />
     </bean>
 
     <reference id="osgiEventAdmin" interface="org.osgi.service.event.EventAdmin" />
@@ -46,7 +47,7 @@
           scope="singleton"
           init-method="initialise" activation="lazy">
         <property name="eventAdmin" ref="osgiEventAdmin" />
-        <property name="toolkitService" ref="toolkitservice" />
+        <property name="utilityService" ref="utilityservice" />
     </bean>
 
     <service id="animatednodeservice" interface="com.javatechnics.osgifx.node.NodeService" ref="animatednode"/>

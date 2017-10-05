@@ -20,6 +20,7 @@ package com.javatechnics.osgifx.node;
 import java.io.IOException;
 
 @FunctionalInterface
+@Deprecated
 public interface ControllerLoader <T>
 {
      ControllerWrapper<T> loadControllerWrapper(Class<T> clazz, String fxmlFile) throws IOException;
