@@ -39,6 +39,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
+                        <Bundle-Activator>com.javatechnics.osgifx.boot.OsgiFxBundle</Bundle-Activator>
                         <Export-Package>com.javatechnics.osgifx.scene,
                                         com.javatechnics.osgifx.node,
                                         com.javatechnics.osgifx.util,
