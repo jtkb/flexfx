@@ -22,7 +22,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javatechnics.osgifx.examples.simplenodeservice.node.AnimatedNodeController">
    <children>
-      <Circle blendMode="SCREEN" fill="DODGERBLUE" layoutX="185.0" layoutY="173.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="DODGERBLUE" layoutX="185.0" layoutY="173.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Circle fill="DODGERBLUE" layoutX="279.0" layoutY="305.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <Circle fill="#ff1f66" layoutX="492.0" layoutY="179.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
    </children>

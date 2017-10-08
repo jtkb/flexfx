@@ -21,10 +21,14 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Bundle private class that starts the JavaFx thread, returning the Stage object to the OSGi visible calling class.
  */
-public class Bootstrap extends Application {
+public class Bootstrap extends Application
+{
 
     private static Stage primaryStage;
 
@@ -32,8 +36,12 @@ public class Bootstrap extends Application {
 
     private static final boolean IS_FX_THREAD_RESTART = true;
 
+    private static final String LOGGER_NAME = "Bootstrap";
+
+
     /**
      * Called by the JavaFxThread.
+     *
      * @param primaryStage
      * @throws Exception
      */
@@ -49,13 +57,16 @@ public class Bootstrap extends Application {
      */
     public static void startMe()
     {
-        if (primaryStage == null) {
-            try {
+        if (primaryStage == null)
+        {
+            try
+            {
                 Platform.setImplicitExit(false);
                 Bootstrap.launch();
-            } catch (IllegalStateException exception) {
-                // Catch the exception here - perhaps log - the JavaFX main thread has already been started?
-                System.out.println(exception.getMessage());
+            }
+            catch (Exception exception)
+            {
+                OsgiFxBundle.setStartupException(exception);
             }
         }
         else
