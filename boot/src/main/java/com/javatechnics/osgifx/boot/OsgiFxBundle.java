@@ -19,10 +19,14 @@ package com.javatechnics.osgifx.boot;
 
 import com.javatechnics.osgifx.stage.controller.StageController;
 import javafx.stage.Stage;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
 import org.osgi.framework.InvalidSyntaxException;
 
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,7 +35,7 @@ import java.util.logging.Logger;
  * This is the created by the OSGi framework via blueprint and triggers the starting of the JavaFx thread.
  * It essentially acts as a coordinator between the OSGi framework and the JavaFx thread.
  */
-public class OsgiFxBundle
+public class OsgiFxBundle implements BundleActivator
 {
 
     private static Stage primaryStage;
@@ -58,10 +62,19 @@ public class OsgiFxBundle
         super();
     }
 
-    /**
-     * Called by the Blueprint manager to start the bundle.
-     */
-    public void startBundle() throws InterruptedException, BundleException
+    @Override
+    public void start(final BundleContext bundleContext) throws Exception
+    {
+        this.startBundle();
+    }
+
+    @Override
+    public void stop(final BundleContext bundleContext) throws Exception
+    {
+        this.stopBundle();
+    }
+
+    private void startBundle() throws InterruptedException, BundleException
     {
         /*
         Bootstrap.startMe() must be called from another thread with it's context class loader set to that of
@@ -69,7 +82,6 @@ public class OsgiFxBundle
         thread (not the class!). Start in another thread is also required otherwise an unexpected exception is thrown
         from further down in the JavaFX core code. (reason not fully understood at this time).
          */
-
         Executors.defaultThreadFactory().newThread(() ->
         {
             Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
@@ -81,8 +93,7 @@ public class OsgiFxBundle
         if (FX_THREAD_STARTED.get())
         {
             // TODO: Register toolkit and Utility services here.
-        }
-        else
+        } else
         {
             Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
             FX_THREAD_STARTUP_TIMEOUT.set(Boolean.TRUE);
@@ -96,14 +107,10 @@ public class OsgiFxBundle
 
     }
 
-    /**
-     * Called by the Blueprint manager to stop the bundle. Un-registers the stage service.
-     */
-    public void stopBundle()
+    private void stopBundle()
     {
         if (stageController != null)
         {
-            // TODO: Unregister toolkit and utility services here.
             stageController.stop();
             stageController = null;
             Logger.getLogger(LOGGER_NAME).log(Level.INFO, "Stopped StageController");
