@@ -17,12 +17,12 @@
 
 package com.javatechnics.osgifx.boot;
 
+import com.javatechnics.osgifx.platform.Toolkit;
 import com.javatechnics.osgifx.stage.controller.StageController;
+import com.javatechnics.osgifx.util.UtilityService;
+import com.javatechnics.osgifx.util.impl.UtilityServiceImpl;
 import javafx.stage.Stage;
-import org.osgi.framework.BundleActivator;
-import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleException;
-import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.*;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
@@ -56,6 +56,10 @@ public class OsgiFxBundle implements BundleActivator
 
     private static Exception startupException = null;
 
+    private ServiceRegistration<UtilityService> utilityServiceServiceRegistration = null;
+
+    private ServiceRegistration<Toolkit> toolkitServiceRegistration = null;
+
 
     public OsgiFxBundle()
     {
@@ -65,7 +69,7 @@ public class OsgiFxBundle implements BundleActivator
     @Override
     public void start(final BundleContext bundleContext) throws Exception
     {
-        this.startBundle();
+        this.startBundle(bundleContext);
     }
 
     @Override
@@ -74,7 +78,7 @@ public class OsgiFxBundle implements BundleActivator
         this.stopBundle();
     }
 
-    private void startBundle() throws InterruptedException, BundleException
+    private void startBundle(final BundleContext bundleContext) throws InterruptedException, BundleException
     {
         /*
         Bootstrap.startMe() must be called from another thread with it's context class loader set to that of
@@ -92,7 +96,9 @@ public class OsgiFxBundle implements BundleActivator
         javaFxStartup.await(JAVAFX_THREAD_STARTUP_TIMEOUT, TimeUnit.SECONDS);
         if (FX_THREAD_STARTED.get())
         {
-            // TODO: Register toolkit and Utility services here.
+            utilityServiceServiceRegistration = bundleContext.registerService(UtilityService.class, new UtilityServiceImpl(), null);
+            toolkitServiceRegistration = bundleContext.registerService(Toolkit.class, () -> true, null);
+
         } else
         {
             Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
@@ -111,6 +117,16 @@ public class OsgiFxBundle implements BundleActivator
     {
         if (stageController != null)
         {
+            if (utilityServiceServiceRegistration != null)
+            {
+                utilityServiceServiceRegistration.unregister();
+                utilityServiceServiceRegistration = null;
+            }
+            if (toolkitServiceRegistration != null)
+            {
+                toolkitServiceRegistration.unregister();
+                toolkitServiceRegistration = null;
+            }
             stageController.stop();
             stageController = null;
             Logger.getLogger(LOGGER_NAME).log(Level.INFO, "Stopped StageController");

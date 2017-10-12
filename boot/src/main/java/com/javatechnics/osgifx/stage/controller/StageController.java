@@ -17,10 +17,7 @@
 
 package com.javatechnics.osgifx.stage.controller;
 
-import com.javatechnics.osgifx.platform.Toolkit;
 import com.javatechnics.osgifx.scene.SceneService;
-import com.javatechnics.osgifx.util.UtilityService;
-import com.javatechnics.osgifx.util.impl.UtilityServiceImpl;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -50,8 +47,6 @@ public class StageController implements ServiceListener
     private boolean isFxThreadRestart = true;
     private boolean hasBeenVisible = false;
     private final Object serviceListenerLock = new Object();
-    private ServiceRegistration<UtilityService> utilityServiceServiceRegistration = null;
-    private ServiceRegistration<Toolkit> toolkitServiceRegistration = null;
 
     public StageController(final Stage primaryStage)
     {
@@ -84,8 +79,6 @@ public class StageController implements ServiceListener
             bundleContext.addServiceListener(this, SCENE_SERVICE_FILTER);
         }
 
-        utilityServiceServiceRegistration = bundleContext.registerService(UtilityService.class, new UtilityServiceImpl(), null);
-        toolkitServiceRegistration = bundleContext.registerService(Toolkit.class, () -> true, null);
     }
 
     /**
@@ -104,8 +97,6 @@ public class StageController implements ServiceListener
                 primaryStage.hide();
             }
         });
-        utilityServiceServiceRegistration.unregister();
-        toolkitServiceRegistration.unregister();
     }
 
     /**
