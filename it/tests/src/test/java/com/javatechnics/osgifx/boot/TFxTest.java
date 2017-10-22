@@ -33,6 +33,7 @@ import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.testfx.api.FxToolkit;
+import org.testfx.osgi.service.TestFx;
 
 import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
@@ -64,6 +65,9 @@ public class TFxTest
     protected BootFinished bootFinished;
 
     @Inject
+    protected TestFx testFx;
+
+    @Inject
     protected SessionFactory sessionFactory;
 
     @Inject
@@ -78,6 +82,8 @@ public class TFxTest
                                 .unpackDirectory(new File("target/paxexam/unpack")),
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
                                 new File("src/test/resources/etc/bundleinstall.cfg")),
+                        replaceConfigurationFile(CONFIG_PROPERTIES,
+                                new File("src/test/resources/etc/config.properties")),
                         mavenBundle()
                                 .groupId(OSGIFX_GROUP_ID)
                                 .artifactId(OSGIFX_BOOT_ARTIFACT_ID)
@@ -87,8 +93,10 @@ public class TFxTest
                                 .artifactId(IT_DUMMY_BUNDLE_ARTIFACT_ID)
                                 .versionAsInProject(),
                         mavenBundle(GUAVA_GROUP_ID, GUAVA_ARTIFACT_ID, GUAVA_VERSION),
-                        mavenBundle(TESTFX_GROUP_ID, TESTFX_ARTIFACT_ID, TESTFX_VERSION),
+                        mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
+                        mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNALJAVA8_ARTIFACT_ID, TESTFX_VERSION),
                         logLevel(LogLevelOption.LogLevel.INFO),
+                        keepRuntimeFolder()
                 };
     }
 

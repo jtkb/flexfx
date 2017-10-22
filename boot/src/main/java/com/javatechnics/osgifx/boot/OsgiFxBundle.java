@@ -99,7 +99,8 @@ public class OsgiFxBundle implements BundleActivator
             utilityServiceServiceRegistration = bundleContext.registerService(UtilityService.class, new UtilityServiceImpl(), null);
             toolkitServiceRegistration = bundleContext.registerService(Toolkit.class, () -> true, null);
 
-        } else
+        }
+        else
         {
             Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
             FX_THREAD_STARTUP_TIMEOUT.set(Boolean.TRUE);

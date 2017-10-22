@@ -61,10 +61,9 @@ public class OsgiFxFailureTest
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
                                 new File("src/test/resources/etc/bundleinstall.cfg")),
                         mavenBundle(GUAVA_GROUP_ID, GUAVA_ARTIFACT_ID, GUAVA_VERSION),
-                        mavenBundle(TESTFX_GROUP_ID, TESTFX_ARTIFACT_ID, TESTFX_VERSION),
+                        mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
                         logLevel(LogLevelOption.LogLevel.INFO),
-                        debugConfiguration("5005", true),
-                        keepRuntimeFolder()
+                        debugConfiguration("5005", true)
                 };
     }
 
