@@ -33,11 +33,17 @@ public final class OsgiFxTestConstants {
     public static final String PROJECT_VERSION = "1.0.0-SNAPSHOT";
     public static final String TESTFX_GROUP_ID = "org.testfx";
     public static final String TESTFX_CORE_ARTIFACT_ID = "testfx-core";
-    public static final String TESTFX_INTERNALJAVA8_ARTIFACT_ID = "testfx-internal-java8";
+    public static final String TESTFX_INTERNAL_JAVA8_ARTIFACT_ID = "testfx-internal-java8";
+    public static final String TESTFX_INTERNAL_JAVA9_ARTIFACT_ID = "testfx-internal-java9";
+    public static final String TESTFX_INTERNAL_ARTIFACT_ID = System.getProperty("java.version").startsWith("1.8")
+            ? TESTFX_INTERNAL_JAVA8_ARTIFACT_ID : TESTFX_INTERNAL_JAVA9_ARTIFACT_ID;
     public static final String TESTFX_VERSION = "4.0.9-alpha";
     public static final String GUAVA_GROUP_ID = "com.google.guava";
     public static final String GUAVA_ARTIFACT_ID = "guava";
     public static final String GUAVA_VERSION = "21.0";
+    public static final String FINDBUGS_GROUP_ID = "com.google.code.findbugs";
+    public static final String FINDBUGS_ARTIFACT_ID = "annotations";
+    public static final String FINDBUGS_VERSION = "3.0.1u2";
     public static final MavenArtifactUrlReference KARAF_URL = maven()
             .artifactId("apache-karaf")
             .groupId("org.apache.karaf")

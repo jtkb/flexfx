@@ -92,9 +92,10 @@ public class TFxTest
                                 .groupId(OSGIFX_GROUP_ID)
                                 .artifactId(IT_DUMMY_BUNDLE_ARTIFACT_ID)
                                 .versionAsInProject(),
+                        mavenBundle(FINDBUGS_GROUP_ID, FINDBUGS_ARTIFACT_ID, FINDBUGS_VERSION),
                         mavenBundle(GUAVA_GROUP_ID, GUAVA_ARTIFACT_ID, GUAVA_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
-                        mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNALJAVA8_ARTIFACT_ID, TESTFX_VERSION),
+                        mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
                         logLevel(LogLevelOption.LogLevel.INFO),
                         keepRuntimeFolder()
                 };

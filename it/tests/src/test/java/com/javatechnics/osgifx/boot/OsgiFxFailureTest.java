@@ -36,7 +36,7 @@ public class OsgiFxFailureTest
     private PrintStream printStream = new PrintStream(byteArrayOutputStream);
     private PrintStream errStream = new PrintStream(byteArrayOutputStream);
     private Session session;
-    private static final String installCommand ="bundle:install mvn:"
+    private static final String installCommand = "bundle:install mvn:"
             + OSGIFX_GROUP_ID + "/"
             + OSGIFX_BOOT_ARTIFACT_ID + "/"
             + PROJECT_VERSION;
