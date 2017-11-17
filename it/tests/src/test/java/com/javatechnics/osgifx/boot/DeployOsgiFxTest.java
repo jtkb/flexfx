@@ -73,8 +73,7 @@ public class DeployOsgiFxTest {
                                 .groupId(OSGIFX_GROUP_ID)
                                 .artifactId(OSGIFX_BOOT_ARTIFACT_ID)
                                 .versionAsInProject(),
-                        logLevel(LogLevelOption.LogLevel.INFO),
-                        keepRuntimeFolder()
+                        logLevel(LogLevelOption.LogLevel.INFO)
                 };
     }
 

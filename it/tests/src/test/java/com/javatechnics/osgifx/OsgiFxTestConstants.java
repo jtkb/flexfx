@@ -27,15 +27,17 @@ public final class OsgiFxTestConstants {
     public static final String OSGIFX_BOOT_ARTIFACT_ID = "boot";
     public static final String KARAF_VERSION = "4.0.6";
     public static final String BUNDLE_INSTALL_ACL_CFG = "etc/org.apache.karaf.command.acl.bundle.cfg";
+    public static final String CONFIG_PROPERTIES = "etc/config.properties";
     public static final String IT_DUMMY_BUNDLE_ARTIFACT_ID = "dummy";
     public static final String DUMMY_TWO_BUNDLE_ARTIFACT_ID = "dummy-two";
     public static final String PROJECT_VERSION = "1.0.0-SNAPSHOT";
     public static final String TESTFX_GROUP_ID = "org.testfx";
-    public static final String TESTFX_ARTIFACT_ID = "testfx-core";
-    public static final String TESTFX_VERSION = "4.0.7-alpha";
-    public static final String GUAVA_GROUP_ID = "com.google.guava";
-    public static final String GUAVA_ARTIFACT_ID = "guava";
-    public static final String GUAVA_VERSION = "21.0";
+    public static final String TESTFX_CORE_ARTIFACT_ID = "testfx-core";
+    public static final String TESTFX_INTERNAL_JAVA8_ARTIFACT_ID = "testfx-internal-java8";
+    public static final String TESTFX_INTERNAL_JAVA9_ARTIFACT_ID = "testfx-internal-java9";
+    public static final String TESTFX_INTERNAL_ARTIFACT_ID = System.getProperty("java.version").startsWith("1.8")
+            ? TESTFX_INTERNAL_JAVA8_ARTIFACT_ID : TESTFX_INTERNAL_JAVA9_ARTIFACT_ID;
+    public static final String TESTFX_VERSION = "4.0.8-alpha";
     public static final MavenArtifactUrlReference KARAF_URL = maven()
             .artifactId("apache-karaf")
             .groupId("org.apache.karaf")
