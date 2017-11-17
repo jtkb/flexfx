@@ -102,12 +102,18 @@ public class OsgiFxBundle implements BundleActivator
         }
         else
         {
-            Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
             FX_THREAD_STARTUP_TIMEOUT.set(Boolean.TRUE);
-            final BundleException bundleException = new BundleException(String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
+            final BundleException bundleException;
             if (startupException != null)
             {
+                Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_FAILED);
+                bundleException = new BundleException(startupException.getMessage());
                 bundleException.initCause(startupException);
+            }
+            else
+            {
+                Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
+                bundleException = new BundleException(String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
             }
             throw bundleException;
         }

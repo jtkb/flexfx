@@ -94,8 +94,7 @@ public class TFxTest
                                 .versionAsInProject(),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
-                        logLevel(LogLevelOption.LogLevel.INFO),
-                        keepRuntimeFolder()
+                        logLevel(LogLevelOption.LogLevel.INFO)
                 };
     }
 

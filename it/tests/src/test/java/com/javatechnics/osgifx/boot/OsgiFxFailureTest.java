@@ -4,7 +4,10 @@ import org.apache.karaf.features.BootFinished;
 import org.apache.karaf.shell.api.console.Session;
 import org.apache.karaf.shell.api.console.SessionFactory;
 import org.apache.karaf.shell.support.MultiException;
-import org.junit.*;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
@@ -15,7 +18,6 @@ import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.BundleException;
 
 import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
@@ -27,7 +29,6 @@ import static com.javatechnics.osgifx.OsgiFxTestConstants.*;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 
-//@Ignore("Marked as ignored as when getting the bundle state using the injected bundleContext, always sowing ACTIVE")
 @ExamReactorStrategy(PerClass.class)
 @RunWith(PaxExam.class)
 public class OsgiFxFailureTest
@@ -112,10 +113,16 @@ public class OsgiFxFailureTest
         Assert.assertNotEquals(firstBootBundleId, bundleId);
 
         // Try starting the re-installed bundle.
-        expectedException.expect(MultiException.class);
-        session.execute("start " + bundleId);
-        bootBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
-        Assert.assertNotEquals("Boot bundle expected to be in failed state." + bootBundle.getState(), Bundle.ACTIVE, bootBundle.getState());
+        try
+        {
+            expectedException.expect(MultiException.class);
+            session.execute("start " + bundleId);
+        }
+        finally
+        {
+            bootBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
+            Assert.assertNotEquals("Boot bundle NOT expected to be ACTIVE" + bootBundle.getState(), Bundle.ACTIVE, bootBundle.getState());
+        }
     }
 
     private Bundle getInstalledBundle(final String bundleSymbolicName)
