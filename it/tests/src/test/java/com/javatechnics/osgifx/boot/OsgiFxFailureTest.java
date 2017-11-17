@@ -3,10 +3,9 @@ package com.javatechnics.osgifx.boot;
 import org.apache.karaf.features.BootFinished;
 import org.apache.karaf.shell.api.console.Session;
 import org.apache.karaf.shell.api.console.SessionFactory;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.apache.karaf.shell.support.MultiException;
+import org.junit.*;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
@@ -16,6 +15,7 @@ import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
 
 import javax.inject.Inject;
 import java.io.ByteArrayOutputStream;
@@ -27,7 +27,7 @@ import static com.javatechnics.osgifx.OsgiFxTestConstants.*;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 
-@Ignore("Marked as ignored as when getting the bundle state using the injected bundleContext, always sowing ACTIVE")
+//@Ignore("Marked as ignored as when getting the bundle state using the injected bundleContext, always sowing ACTIVE")
 @ExamReactorStrategy(PerClass.class)
 @RunWith(PaxExam.class)
 public class OsgiFxFailureTest
@@ -60,12 +60,16 @@ public class OsgiFxFailureTest
                                 .unpackDirectory(new File("target/paxexam/unpack")),
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
                                 new File("src/test/resources/etc/bundleinstall.cfg")),
-                        mavenBundle(GUAVA_GROUP_ID, GUAVA_ARTIFACT_ID, GUAVA_VERSION),
+                        replaceConfigurationFile(CONFIG_PROPERTIES,
+                                new File("src/test/resources/etc/config.properties")),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
-                        logLevel(LogLevelOption.LogLevel.INFO),
-                        debugConfiguration("5005", true)
+                        mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
+                        logLevel(LogLevelOption.LogLevel.INFO)
                 };
     }
+
+    @Rule
+    public final ExpectedException expectedException = ExpectedException.none();
 
     @Before
     public void setUp() throws TimeoutException
@@ -108,6 +112,7 @@ public class OsgiFxFailureTest
         Assert.assertNotEquals(firstBootBundleId, bundleId);
 
         // Try starting the re-installed bundle.
+        expectedException.expect(MultiException.class);
         session.execute("start " + bundleId);
         bootBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
         Assert.assertNotEquals("Boot bundle expected to be in failed state." + bootBundle.getState(), Bundle.ACTIVE, bootBundle.getState());
