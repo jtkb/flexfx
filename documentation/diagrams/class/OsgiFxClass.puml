@@ -2,7 +2,7 @@
 
 interface SceneService
 interface NodeService
-interface ServiceListener
+interface ServiceListener<SceneService>
 interface StageManagement
 
 class OsgiFxBundle

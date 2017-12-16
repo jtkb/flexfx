@@ -8,10 +8,29 @@ end note
 Executor -> Bootstrap : startMe()
 Bootstrap -> Application : launch()
 ...Undetermined time to start JavaFX thread...
+note left
+A timed latch prevents
+the calling thread being
+blocked indefinitely if
+Fx fails to initialise
+end note
 Bootstrap <-- Application : start(Stage)
 OsgiFxBundle <-- Bootstrap : setStage(Stage)
 OsgiFxBundle -> StageController : start()
 StageController -> BundleContext : getServiceReference()
 StageController <-- BundleContext
-StageController -> BundleContext : registerServiceListener()
+StageController -> BundleContext : registerServiceListener() - SceneService
+note right
+Registering SceneService listener
+means the JavaFx thread and toolkit
+are fully started.
+end note
+StageController --> OsgiFxBundle
+OsgiFxBundle -> BundleContext : registerService - UtilityService
+note right
+Bundles can use UtilityService
+to inflate FXML when and only
+when the Fx toolkit has started.
+end note
+OsgiFxBundle -> BundleContext : registerService - Toolkit Service
 @enduml

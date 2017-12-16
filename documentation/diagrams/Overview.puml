@@ -1,0 +1,20 @@
+@startuml
+package "OSGiFX" #Yellow {
+
+interface "SceneService" as SS
+interface "UtilityService" as US
+interface "Toolkit" as TK
+component [Boot bundle]
+[Boot bundle] -down-> TK
+[Boot bundle] -down-> US
+[Boot bundle] -right.. SS : Uses
+
+}
+
+package "Your Bundles" {
+component [SceneService Bundle]
+SS <-up- [SceneService Bundle] : provides
+[SceneService Bundle] -up..> US : optionally uses
+[SceneService Bundle] -up..> TK : optionally uses
+}
+@enduml

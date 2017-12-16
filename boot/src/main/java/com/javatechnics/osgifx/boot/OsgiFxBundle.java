@@ -32,7 +32,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * This is the created by the OSGi framework via blueprint and triggers the starting of the JavaFx thread.
+ * This is the created by the OSGi framework and triggers the starting of the JavaFx thread.
  * It essentially acts as a coordinator between the OSGi framework and the JavaFx thread.
  */
 public class OsgiFxBundle implements BundleActivator

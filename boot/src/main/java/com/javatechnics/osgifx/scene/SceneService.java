@@ -22,9 +22,23 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
+/**
+ * Bundles should implement this service if they create an instance of a Parent node that is intended to
+ * be the root node in the Stage.
+ */
 public interface SceneService
 {
+    /**
+     * Returns the root node to be used within the Stage.
+     * @return the root node.
+     * @throws IOException can be thrown if inflating an FXML file as part of the implementation.
+     */
     Scene getScene() throws IOException;
 
+    /**
+     * The preferred StageStyle for the scene. The preferred style is not guaranteed due to JavaFX toolkit
+     * implementation.
+     * @return the preferred StageStyle or StageStyle.DECORATED by default.
+     */
     default StageStyle getPreferredStageStyle() { return StageStyle.DECORATED; }
 }

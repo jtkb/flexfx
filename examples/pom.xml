@@ -30,6 +30,7 @@
     <modules>
         <module>simple-example</module>
         <module>basic-node-service</module>
+        <module>ds-example</module>
     </modules>
     <dependencies>
         <dependency>
