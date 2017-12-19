@@ -19,7 +19,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
-        <groupId>com.javatechnics.osgifx</groupId>
+        <groupId>com.javatechnics.flexfx</groupId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
@@ -39,11 +39,11 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>com.javatechnics.osgifx.boot.OsgiFxBundle</Bundle-Activator>
-                        <Export-Package>com.javatechnics.osgifx.scene,
-                                        com.javatechnics.osgifx.node,
-                                        com.javatechnics.osgifx.util,
-                                        com.javatechnics.osgifx.platform</Export-Package>
+                        <Bundle-Activator>com.javatechnics.flexfx.boot.OsgiFxBundle</Bundle-Activator>
+                        <Export-Package>com.javatechnics.flexfx.scene,
+                            com.javatechnics.flexfx.node,
+                            com.javatechnics.flexfx.util,
+                            com.javatechnics.flexfx.platform</Export-Package>
                     </instructions>
                 </configuration>
             </plugin>

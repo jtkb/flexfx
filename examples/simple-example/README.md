@@ -18,4 +18,4 @@ Class Loader switching.
 ### Installing In Karaf
 Install the simple-example feature with the following command:
 
-`repo-add mvn:com.javatechnics.osgifx/simple-example/1.0.0-SNAPSHOT/xml/features`
+`repo-add mvn:com.javatechnics.flexfx/simple-example/1.0.0-SNAPSHOT/xml/features`
