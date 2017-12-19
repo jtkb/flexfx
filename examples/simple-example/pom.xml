@@ -19,7 +19,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>examples</artifactId>
-        <groupId>com.javatechnics.osgifx</groupId>
+        <groupId>com.javatechnics.flexfx</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -43,7 +43,7 @@
                 <configuration>
                     <instructions>
                         <Export-Package />
-                        <Bundle-Activator>com.javatechnics.osgifx.examples.simple.SimpleExampleActivator</Bundle-Activator>
+                        <Bundle-Activator>com.javatechnics.flexfx.examples.simple.SimpleExampleActivator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

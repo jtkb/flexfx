@@ -19,7 +19,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>parent</artifactId>
-        <groupId>com.javatechnics.osgifx</groupId>
+        <groupId>com.javatechnics.flexfx</groupId>
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
@@ -34,7 +34,7 @@
     </modules>
     <dependencies>
         <dependency>
-            <groupId>com.javatechnics.osgifx</groupId>
+            <groupId>com.javatechnics.flexfx</groupId>
             <artifactId>boot</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>

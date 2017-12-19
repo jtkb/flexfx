@@ -1,5 +1,5 @@
 ## Examples
-This module contains various examples. To build all the modules from the osgifx root enable the `examples` Maven profile.
+This module contains various examples. To build all the modules from the FlexFX root enable the `examples` Maven profile.
 See each sub project for specific details.
 #### simple-example
 A very basic example that provides a SceneService object pre-populated with a Scene object.

@@ -1,5 +1,5 @@
 @startuml
-package "OSGiFX" #Yellow {
+package "FlexFX" #Yellow {
 
 interface "SceneService" as SS
 interface "UtilityService" as US
