@@ -26,7 +26,7 @@ public interface ParentLoader
 {
     /**
      * The purpose of this method is to load a specified FXML file and inflate it returning the top-level Parent object.
-     * Imlementations should handle the switching back and forth of the appropriate Class Loader.
+     * Implementations should handle the switching back and forth of the appropriate Class Loader.
      * @param clazz a Class object that is in the same bundle as the FXML file.
      * @param fxmlFile the specified FXML file to load and inflate.
      * @return the top-level Parent object of the inflated FXML file.

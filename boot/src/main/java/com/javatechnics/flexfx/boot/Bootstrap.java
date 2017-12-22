@@ -29,24 +29,19 @@ public class Bootstrap extends Application
 
     private static Stage primaryStage;
 
-    private static String APPLICATION_LAUNCH_EXCEPTION = "Application launch must not be called more than once";
-
     private static final boolean IS_FX_THREAD_RESTART = true;
-
-    private static final String LOGGER_NAME = "Bootstrap";
-
 
     /**
      * Called by the JavaFxThread.
      *
-     * @param primaryStage
-     * @throws Exception
+     * @param primaryStage the primary Stage object.
+     * @throws Exception thrown for runtime exception.
      */
     @Override
     public void start(Stage primaryStage) throws Exception
     {
         Bootstrap.primaryStage = primaryStage;
-        OsgiFxBundle.setStage(primaryStage, !IS_FX_THREAD_RESTART);
+        FlexFXBundle.setStage(primaryStage, !IS_FX_THREAD_RESTART);
     }
 
     /**
@@ -63,12 +58,12 @@ public class Bootstrap extends Application
             }
             catch (Exception exception)
             {
-                OsgiFxBundle.setStartupException(exception);
+                FlexFXBundle.setStartupException(exception);
             }
         }
         else
         {
-            OsgiFxBundle.setStage(primaryStage, IS_FX_THREAD_RESTART);
+            FlexFXBundle.setStage(primaryStage, IS_FX_THREAD_RESTART);
         }
     }
 

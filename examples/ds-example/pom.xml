@@ -10,7 +10,7 @@
     <artifactId>ds-example</artifactId>
     <packaging>bundle</packaging>
 
-    <name>ds-example</name>
+    <name>FlexFX :: examples :: ds-example</name>
     <url>http://maven.apache.org</url>
 
     <properties>

@@ -27,7 +27,7 @@
     <artifactId>parent</artifactId>
     <packaging>pom</packaging>
 
-    <name>parent</name>
+    <name>FlexFx :: parent</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

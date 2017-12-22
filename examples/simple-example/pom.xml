@@ -27,7 +27,7 @@
     <artifactId>simple-example</artifactId>
     <packaging>bundle</packaging>
 
-    <name>simple-example</name>
+    <name>FlexFX :: examples :: simple-example</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

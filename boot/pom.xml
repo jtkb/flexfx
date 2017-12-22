@@ -28,7 +28,7 @@
     <artifactId>boot</artifactId>
     <packaging>bundle</packaging>
 
-    <name>boot</name>
+    <name>FlexFX :: boot</name>
 
     <build>
         <plugins>
@@ -39,15 +39,42 @@
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
-                        <Bundle-Activator>com.javatechnics.flexfx.boot.OsgiFxBundle</Bundle-Activator>
+                        <Bundle-Activator>com.javatechnics.flexfx.boot.FlexFXBundle</Bundle-Activator>
                         <Export-Package>com.javatechnics.flexfx.scene,
                             com.javatechnics.flexfx.node,
                             com.javatechnics.flexfx.util,
-                            com.javatechnics.flexfx.platform</Export-Package>
+                            com.javatechnics.flexfx.platform
+                        </Export-Package>
                     </instructions>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>publish</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

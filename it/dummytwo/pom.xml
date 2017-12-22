@@ -27,7 +27,7 @@
     <artifactId>dummy-two</artifactId>
     <packaging>bundle</packaging>
 
-    <name>dummy-two</name>
+    <name>FlexFX :: it :: dummy-two</name>
     <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
