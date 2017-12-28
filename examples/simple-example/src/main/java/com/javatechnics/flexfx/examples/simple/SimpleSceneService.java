@@ -25,17 +25,24 @@ import java.io.IOException;
 
 public class SimpleSceneService implements SceneService
 {
+    private Scene scene;
+
     /**
      * Loads the bundle-private FXML file and places it inside a Scene object. To deal with the boiler-plate
      * ClassLoader switching this implementation takes advantage of the {@link Utils}
      * SceneLoader functional interface implementation.
+     *
      * @return a Scene object populated with inflated FXML file.
      * @throws IOException thrown if the FXML file cannot be found.
      */
     @Override
     public Scene getScene() throws IOException
     {
-        return Utils.sceneLoader.loadScene(this.getClass(), SimpleExampleController.SIMPLE_EXAMPLE_FXML_FILE);
+        if (scene == null)
+        {
+            scene = Utils.sceneLoader.loadScene(this.getClass(), SimpleExampleController.SIMPLE_EXAMPLE_FXML_FILE);
+        }
+        return scene;
     }
 
     /*
