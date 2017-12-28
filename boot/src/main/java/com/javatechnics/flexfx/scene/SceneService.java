@@ -29,7 +29,8 @@ import java.io.IOException;
 public interface SceneService
 {
     /**
-     * Returns the root node to be used within the Stage.
+     * Returns the root node to be used within the Stage. This method can be called when the bundle is registered and
+     * unregistered. The same object must be returned whenever this method is called.
      * @return the root node.
      * @throws IOException can be thrown if inflating an FXML file as part of the implementation.
      */
