@@ -20,7 +20,7 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>com.javatechnics.flexfx</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.javatechnics.flexfx</groupId>
             <artifactId>boot</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
@@ -85,6 +85,15 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <groupId>org.apache.maven.plugins</groupId>
                 <extensions>true</extensions>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- GPG sign - de-active -->
+            <plugin>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
