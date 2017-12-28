@@ -30,7 +30,7 @@ public final class OsgiFxTestConstants {
     public static final String CONFIG_PROPERTIES = "etc/config.properties";
     public static final String IT_DUMMY_BUNDLE_ARTIFACT_ID = "dummy";
     public static final String DUMMY_TWO_BUNDLE_ARTIFACT_ID = "dummy-two";
-    public static final String PROJECT_VERSION = "1.0.0-SNAPSHOT";
+    public static final String PROJECT_VERSION = "1.0.0";
     public static final String JAVATECHNICS_TESTFX_GROUP_ID = "com.javatechnics.org.testfx";
     public static final String TESTFX_GROUP_ID =  System.getProperty("java.version").startsWith("1.8")
             ? JAVATECHNICS_TESTFX_GROUP_ID :"org.testfx";
