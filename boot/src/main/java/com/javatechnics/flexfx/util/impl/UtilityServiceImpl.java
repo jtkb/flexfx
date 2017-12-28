@@ -28,7 +28,7 @@ import java.lang.reflect.Field;
 public final class UtilityServiceImpl implements UtilityService
 {
     @Override
-    public final void populateWrapper(final ControllerWrapper wrapper, final String fxmlFile) throws IOException, NoSuchFieldException, IllegalAccessException
+    public final void populateWrapper(final ControllerWrapper wrapper, final String fxmlFile) throws IOException, ClassCastException
     {
         final ClassLoader ccl = Thread.currentThread().getContextClassLoader();
         try
@@ -42,6 +42,12 @@ public final class UtilityServiceImpl implements UtilityService
             final Parent parentNode = loader.load();
             controllerField.set(wrapper, wrapper.getControllerClass().cast(loader.getController()));
             parentNodeField.set(wrapper, parentNode);
+        }
+        catch (IllegalAccessException | NoSuchFieldException exception)
+        {
+            // Safe to capture here as in full control of the ControllerWrapper source and hence field access and
+            // field availability. We should never arrive here, at least not in production.
+            throw new RuntimeException(exception);
         }
         finally
         {

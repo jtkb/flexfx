@@ -10,7 +10,7 @@
     <artifactId>basic-node-service</artifactId>
     <packaging>bundle</packaging>
 
-    <name>basic-node-service</name>
+    <name>FlexFX :: examples :: basic-node-service</name>
     <url>http://maven.apache.org</url>
 
     <properties>

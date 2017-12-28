@@ -35,7 +35,7 @@ import java.util.logging.Logger;
  * This is the created by the OSGi framework and triggers the starting of the JavaFx thread.
  * It essentially acts as a coordinator between the OSGi framework and the JavaFx thread.
  */
-public class OsgiFxBundle implements BundleActivator
+public class FlexFXBundle implements BundleActivator
 {
 
     private static Stage primaryStage;
@@ -61,7 +61,7 @@ public class OsgiFxBundle implements BundleActivator
     private ServiceRegistration<Toolkit> toolkitServiceRegistration = null;
 
 
-    public OsgiFxBundle()
+    public FlexFXBundle()
     {
         super();
     }
@@ -151,8 +151,8 @@ public class OsgiFxBundle implements BundleActivator
         if (!FX_THREAD_STARTUP_TIMEOUT.get())
         {
             ClassLoader currentClassLoader = Thread.currentThread().getContextClassLoader();
-            Thread.currentThread().setContextClassLoader(OsgiFxBundle.class.getClassLoader());
-            OsgiFxBundle.primaryStage = primaryStage;
+            Thread.currentThread().setContextClassLoader(FlexFXBundle.class.getClassLoader());
+            FlexFXBundle.primaryStage = primaryStage;
 
             stageController = new StageController(primaryStage);
             try

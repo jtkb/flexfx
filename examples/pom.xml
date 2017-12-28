@@ -26,7 +26,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>examples</artifactId>
     <packaging>pom</packaging>
-    <name>examples</name>
+    <name>FlexFX :: examples</name>
     <modules>
         <module>simple-example</module>
         <module>basic-node-service</module>
@@ -61,6 +61,33 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- Java sources - de-active -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <configuration>
+                    <skipSource>true</skipSource>
+                </configuration>
+            </plugin>
+
+            <!-- Javadoc - de-active -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!-- Deploy - de-active  -->
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <extensions>true</extensions>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
             </plugin>
         </plugins>
     </build>

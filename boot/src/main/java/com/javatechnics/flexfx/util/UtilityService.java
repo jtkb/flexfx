@@ -29,9 +29,10 @@ public interface UtilityService
 {
     /**
      * Populates the specified wrapper with the controller specified within the FXML file.
-     * @param utilityControllerWrapper the wrapper object to populate.
+     * @param controllerWrapper the wrapper object to populate.
      * @param fxmlFile the FXML file name to inflate.
-     * @throws IOException
+     * @throws IOException thrown if the ParentNode cannot be loaded.
+     * @throws ClassCastException thrown if the FXML controller cannot be cast to the specified controller class.
      */
-    void populateWrapper(ControllerWrapper utilityControllerWrapper, String fxmlFile) throws IOException, NoSuchFieldException, IllegalAccessException;
+    void populateWrapper(ControllerWrapper controllerWrapper, String fxmlFile) throws IOException;
 }

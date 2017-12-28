@@ -17,6 +17,11 @@
 
 package com.javatechnics.flexfx.platform;
 
+/**
+ * Implement and offered as an OSGi service when the JavaFX thread has been started. Client
+ * bundles can take the availability of this service as a guarantee that methods that rely on the
+ * JavaFX toolkit are safe to call.
+ */
 @FunctionalInterface
 public interface Toolkit
 {

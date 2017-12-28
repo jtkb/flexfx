@@ -33,6 +33,7 @@ public class DummyTwoSceneServiceImpl implements SceneService {
         Parent parent;
         try
         {
+            Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
             parent = FXMLLoader.load(this.getClass().getResource("DummyTwoPanel.fxml"));
         }
         finally

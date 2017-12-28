@@ -65,8 +65,9 @@ public final class Utils
      * @param <T>      The controller type as specified in the FXML file.
      * @return ControllerWrapper containing the controller and parent node.
      * @throws IOException thrown if the specified FXML file cannot be found.
+     * @throws ClassCastException thrown if the FXML controller cannot be cast to the specified controller class, T
      */
-    public static <T> ControllerWrapper<T> getWrapper(Class<T> clazz, String fxmlFile) throws IOException, ClassCastException, NoSuchFieldException, IllegalAccessException
+    public static <T> ControllerWrapper<T> getWrapper(Class<T> clazz, String fxmlFile) throws IOException, ClassCastException
     {
         ControllerWrapper<T> wrapper = null;
         ClassLoader ccl = Thread.currentThread().getContextClassLoader();
@@ -82,6 +83,11 @@ public final class Utils
             wrapper = new ControllerWrapper<>(clazz);
             controllerField.set(wrapper, wrapper.getControllerClass().cast(loader.getController()));
             parentNodeField.set(wrapper, parentNode);
+        }
+        catch (IllegalAccessException | NoSuchFieldException exception)
+        {
+            // Should never end up here in production as control of ControllerWrapper source.
+            throw new RuntimeException(exception);
         }
         finally
         {
