@@ -20,7 +20,7 @@
     <parent>
         <artifactId>it</artifactId>
         <groupId>com.javatechnics.flexfx</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -30,9 +30,13 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <pax.exam.version>4.8.0</pax.exam.version>
-        <testfx.groupId>com.javatechnics.org.testfx</testfx.groupId>
-        <testfx.version>4.0.8-alpha</testfx.version>
+        <pax.exam.version>4.11.0</pax.exam.version>
+        <testfx.groupId>org.testfx</testfx.groupId>
+        <testfx.core.artifactId>testfx-core</testfx.core.artifactId>
+        <testfx.internal.java8.artifactId>testfx-internal-java8</testfx.internal.java8.artifactId>
+        <testfx.internal.java9.artifactId>testfx-internal-java9</testfx.internal.java9.artifactId>
+        <testfx.version>4.0.10-alpha</testfx.version>
+        <karaf.version>4.0.6</karaf.version>
     </properties>
 
     <dependencies>
@@ -121,7 +125,7 @@
         </dependency>
         <dependency>
             <groupId>${testfx.groupId}</groupId>
-            <artifactId>testfx-internal-java8</artifactId>
+            <artifactId>${testfx.internal.java8.artifactId}</artifactId>
             <version>${testfx.version}</version>
             <scope>test</scope>
         </dependency>
@@ -129,15 +133,26 @@
         <dependency>
             <groupId>org.apache.karaf</groupId>
             <artifactId>apache-karaf</artifactId>
-            <version>4.0.6</version>
+            <version>${karaf.version}</version>
             <type>zip</type>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <testSourceDirectory>src/test/java</testSourceDirectory>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>templating-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>filter-test-sources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.servicemix.tooling</groupId>
                 <artifactId>depends-maven-plugin</artifactId>
@@ -153,4 +168,26 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>jdk8</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <jdk>1.8</jdk>
+            </activation>
+            <properties>
+                <testfx.internal.artifactId>testfx-internal-java8</testfx.internal.artifactId>
+            </properties>
+        </profile>
+        <profile>
+            <id>jdk9</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+                <jdk>1.9</jdk>
+            </activation>
+            <properties>
+                <testfx.internal.artifactId>testfx-internal-java9</testfx.internal.artifactId>
+            </properties>
+        </profile>
+    </profiles>
 </project>

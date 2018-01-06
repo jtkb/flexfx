@@ -25,22 +25,23 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.concurrent.TimeoutException;
 
-import static com.javatechnics.flexfx.OsgiFxTestConstants.*;
+import static com.javatechnics.flexfx.FlexFxTestConstants.*;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
+import static org.ops4j.pax.exam.CoreOptions.systemPackage;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 
 @ExamReactorStrategy(PerClass.class)
 @RunWith(PaxExam.class)
-public class OsgiFxFailureTest
+public class FlexFxFailureTest
 {
     private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     private PrintStream printStream = new PrintStream(byteArrayOutputStream);
     private PrintStream errStream = new PrintStream(byteArrayOutputStream);
     private Session session;
     private static final String installCommand = "bundle:install mvn:"
-            + OSGIFX_GROUP_ID + "/"
-            + OSGIFX_BOOT_ARTIFACT_ID + "/"
-            + PROJECT_VERSION;
+            + FLEXFX_GROUP_ID + "/"
+            + FLEXFX_BOOT_ARTIFACT_ID + "/"
+            + FLEXFX_VERSION;
 
     @Inject
     protected BootFinished bootFinished;
@@ -61,8 +62,7 @@ public class OsgiFxFailureTest
                                 .unpackDirectory(new File("target/paxexam/unpack")),
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
                                 new File("src/test/resources/etc/bundleinstall.cfg")),
-                        replaceConfigurationFile(CONFIG_PROPERTIES,
-                                new File("src/test/resources/etc/config.properties")),
+                        systemPackage("com.sun.glass.ui"),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
                         logLevel(LogLevelOption.LogLevel.INFO)
@@ -82,14 +82,14 @@ public class OsgiFxFailureTest
     public void testReinstallJavaFxFail() throws Exception
     {
         // Check OsgiFx bundle is not installed
-        Bundle bootBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
+        Bundle bootBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID);
         Assert.assertNull(bootBundle);
 
         //Install OsgiFx bundle
         session.execute(installCommand);
 
         //Check installed
-        bootBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
+        bootBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID);
         Assert.assertNotNull(bootBundle);
         long bundleId = bootBundle.getBundleId();
         final long firstBootBundleId = bundleId;
@@ -102,12 +102,12 @@ public class OsgiFxFailureTest
 
         // Uninstall the bundle
         session.execute("uninstall " + bundleId);
-        bootBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
+        bootBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID);
         Assert.assertNull(bootBundle);
 
         // Re-install the bundle
         session.execute(installCommand);
-        bootBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
+        bootBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID);
         Assert.assertNotNull(bootBundle);
         bundleId = bootBundle.getBundleId();
         Assert.assertNotEquals(firstBootBundleId, bundleId);
@@ -120,7 +120,7 @@ public class OsgiFxFailureTest
         }
         finally
         {
-            bootBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
+            bootBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID);
             Assert.assertNotEquals("Boot bundle NOT expected to be ACTIVE" + bootBundle.getState(), Bundle.ACTIVE, bootBundle.getState());
         }
     }
