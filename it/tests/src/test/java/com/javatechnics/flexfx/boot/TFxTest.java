@@ -41,11 +41,10 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.concurrent.TimeoutException;
 
-import static com.javatechnics.flexfx.OsgiFxTestConstants.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static com.javatechnics.flexfx.FlexFxTestConstants.*;
+import static org.junit.Assert.*;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
+import static org.ops4j.pax.exam.CoreOptions.systemPackage;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.hasText;
@@ -74,7 +73,8 @@ public class TFxTest
     BundleContext bundleContext;
 
     @Configuration
-    public static Option[] configuration() throws Exception {
+    public static Option[] configuration() throws Exception
+    {
         return new Option[]
                 {
                         karafDistributionConfiguration()
@@ -82,47 +82,41 @@ public class TFxTest
                                 .unpackDirectory(new File("target/paxexam/unpack")),
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
                                 new File("src/test/resources/etc/bundleinstall.cfg")),
-                        replaceConfigurationFile(CONFIG_PROPERTIES,
-                                new File("src/test/resources/etc/config.properties")),
+                        systemPackage("com.sun.glass.ui"),
                         mavenBundle()
-                                .groupId(OSGIFX_GROUP_ID)
-                                .artifactId(OSGIFX_BOOT_ARTIFACT_ID)
+                                .groupId(FLEXFX_GROUP_ID)
+                                .artifactId(FLEXFX_BOOT_ARTIFACT_ID)
                                 .versionAsInProject(),
                         mavenBundle()
-                                .groupId(OSGIFX_GROUP_ID)
+                                .groupId(FLEXFX_GROUP_ID)
                                 .artifactId(IT_DUMMY_BUNDLE_ARTIFACT_ID)
                                 .versionAsInProject(),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
-                        logLevel(LogLevelOption.LogLevel.INFO)
+                        logLevel(LogLevelOption.LogLevel.INFO),
+                        keepRuntimeFolder()
                 };
     }
 
     @Before
-    public void setUp() throws TimeoutException {
+    public void setUp() throws TimeoutException
+    {
         session = sessionFactory.create(System.in, printStream, errStream);
-        primaryStage  = FxToolkit.registerStage(() -> new Stage());
+        primaryStage = FxToolkit.registerStage(() -> new Stage());
     }
 
     @Test
     public void testOsgiFxInstalled()
     {
-        final Bundle osgiFxBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID);
+        final Bundle osgiFxBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID);
         assertNotNull(osgiFxBundle);
-        assertEquals(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID + " is not active.", Bundle.ACTIVE, osgiFxBundle.getState());
+        assertEquals(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID + " is not active.", Bundle.ACTIVE, osgiFxBundle.getState());
     }
 
     @Test
     public void testStageAvailable()
     {
-        if (primaryStage == null)
-        {
-            System.out.print("Primary stage is null");
-        }
-        else
-        {
-            System.out.println("Primary stage is not null");
-        }
+        assertNotNull("Primary stage is null", primaryStage);
     }
 
     @Test
@@ -137,17 +131,17 @@ public class TFxTest
     @Test
     public void testSecondSceneServiceNotSelected() throws Exception
     {
-        final String installDummyBundleTwoCommand ="bundle:install mvn:"
-                + OSGIFX_GROUP_ID + "/"
+        final String installDummyBundleTwoCommand = "bundle:install mvn:"
+                + FLEXFX_GROUP_ID + "/"
                 + DUMMY_TWO_BUNDLE_ARTIFACT_ID + "/"
-                + PROJECT_VERSION;
+                + FLEXFX_VERSION;
         // Ensure the dummy bundle two is not installed.
-        Bundle dummyTwoBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + DUMMY_TWO_BUNDLE_ARTIFACT_ID);
+        Bundle dummyTwoBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + DUMMY_TWO_BUNDLE_ARTIFACT_ID);
         assertNull("Dummy Bundle Two found to be already deployed.", dummyTwoBundle);
 
         session.execute(installDummyBundleTwoCommand);
 
-        dummyTwoBundle = getInstalledBundle(OSGIFX_GROUP_ID + "." + DUMMY_TWO_BUNDLE_ARTIFACT_ID);
+        dummyTwoBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + DUMMY_TWO_BUNDLE_ARTIFACT_ID);
         assertNotNull("Dummy Bundle Two was not installed.", dummyTwoBundle);
         if (dummyTwoBundle.getState() != Bundle.ACTIVE)
         {

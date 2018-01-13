@@ -20,7 +20,6 @@ package com.javatechnics.flexfx.boot;
 import org.apache.karaf.features.BootFinished;
 import org.apache.karaf.shell.api.console.Session;
 import org.apache.karaf.shell.api.console.SessionFactory;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,14 +37,16 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 
-import static com.javatechnics.flexfx.OsgiFxTestConstants.*;
+import static com.javatechnics.flexfx.FlexFxTestConstants.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 
 @ExamReactorStrategy(PerClass.class)
 @RunWith(PaxExam.class)
-public class DeployOsgiFxTest {
-
+public class DeployFlexFxTest
+{
     private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
     private PrintStream printStream = new PrintStream(byteArrayOutputStream);
     private PrintStream errStream = new PrintStream(byteArrayOutputStream);
@@ -61,7 +62,8 @@ public class DeployOsgiFxTest {
     BundleContext bundleContext;
 
     @Configuration
-    public static Option[] configuration() throws Exception {
+    public static Option[] configuration() throws Exception
+    {
         return new Option[]
                 {
                         karafDistributionConfiguration()
@@ -70,8 +72,8 @@ public class DeployOsgiFxTest {
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
                                 new File("src/test/resources/etc/bundleinstall.cfg")),
                         mavenBundle()
-                                .groupId(OSGIFX_GROUP_ID)
-                                .artifactId(OSGIFX_BOOT_ARTIFACT_ID)
+                                .groupId(FLEXFX_GROUP_ID)
+                                .artifactId(FLEXFX_BOOT_ARTIFACT_ID)
                                 .versionAsInProject(),
                         logLevel(LogLevelOption.LogLevel.INFO)
                 };
@@ -84,16 +86,17 @@ public class DeployOsgiFxTest {
     }
 
     @Test
-    public void testInstallBundle() throws Exception {
-        final String installCommand ="bundle:install mvn:"
-                + OSGIFX_GROUP_ID + "/"
+    public void testInstallBundle() throws Exception
+    {
+        final String installCommand = "bundle:install mvn:"
+                + FLEXFX_GROUP_ID + "/"
                 + IT_DUMMY_BUNDLE_ARTIFACT_ID + "/"
-                + PROJECT_VERSION;
+                + FLEXFX_VERSION;
         session.execute(installCommand);
         Bundle dummyBundle = null;
         for (Bundle bundle : bundleContext.getBundles())
         {
-            if (bundle.getSymbolicName() != null && bundle.getSymbolicName().equals(OSGIFX_GROUP_ID + "." + IT_DUMMY_BUNDLE_ARTIFACT_ID))
+            if (bundle.getSymbolicName() != null && bundle.getSymbolicName().equals(FLEXFX_GROUP_ID + "." + IT_DUMMY_BUNDLE_ARTIFACT_ID))
             {
                 dummyBundle = bundle;
                 break;
@@ -106,9 +109,9 @@ public class DeployOsgiFxTest {
     public void testOsgiFxInstalled()
     {
         Bundle osgiFxBundle = null;
-        for (Bundle bundle : bundleContext.getBundles() )
+        for (Bundle bundle : bundleContext.getBundles())
         {
-            if (bundle.getSymbolicName() != null && bundle.getSymbolicName().equals(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID))
+            if (bundle.getSymbolicName() != null && bundle.getSymbolicName().equals(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID))
             {
                 osgiFxBundle = bundle;
                 break;
@@ -116,7 +119,7 @@ public class DeployOsgiFxTest {
         }
 
         assertNotNull(osgiFxBundle);
-        assertEquals(OSGIFX_GROUP_ID + "." + OSGIFX_BOOT_ARTIFACT_ID + " is not active.", Bundle.ACTIVE, osgiFxBundle.getState());
+        assertEquals(FLEXFX_GROUP_ID + "." + FLEXFX_BOOT_ARTIFACT_ID + " is not active.", Bundle.ACTIVE, osgiFxBundle.getState());
     }
 
 }
