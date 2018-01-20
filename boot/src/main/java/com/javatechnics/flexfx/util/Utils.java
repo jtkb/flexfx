@@ -29,7 +29,9 @@ import java.lang.reflect.Field;
 
 /**
  * Utility class.
+ * Use UtilityService instead to ensure correct initialisation of the JavaFX toolkit and thread.
  */
+@Deprecated
 public final class Utils
 {
     /**

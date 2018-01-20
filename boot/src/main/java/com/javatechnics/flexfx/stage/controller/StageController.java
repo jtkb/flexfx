@@ -20,7 +20,9 @@ package com.javatechnics.flexfx.stage.controller;
 import com.javatechnics.flexfx.stage.management.StageManager;
 import com.javatechnics.flexfx.scene.SceneService;
 import javafx.application.Platform;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import org.osgi.framework.*;
@@ -148,17 +150,31 @@ public class StageController implements ServiceListener
             final SceneService sceneService = context.getService(sceneServiceReference);
             final Scene scene = sceneService.getScene();
             final StageStyle stageStyle = sceneService.getPreferredStageStyle();
+            final Screen screen = sceneService.getPreferredScreen();
             Platform.runLater(() ->
             {
                 if (primaryStage.getScene() == null)
                 {
-                    primaryStage.setScene(scene);
-                    if (!isFxThreadRestart && !hasBeenVisible)
+                    try
                     {
-                        primaryStage.initStyle(stageStyle);
+                        primaryStage.setScene(scene);
+                        if (!isFxThreadRestart && !hasBeenVisible)
+                        {
+                            primaryStage.initStyle(stageStyle);
+                        }
+                        final Rectangle2D screenBounds = screen.getVisualBounds();
+                        primaryStage.setX(screenBounds.getMinX());
+                        primaryStage.setY(screenBounds.getMinY());
+                        primaryStage.setTitle(sceneService.getTitle());
+                        primaryStage.getIcons().clear();
+                        primaryStage.getIcons().addAll(sceneService.getIcons());
+                        primaryStage.show();
+                        hasBeenVisible = true;
                     }
-                    primaryStage.show();
-                    hasBeenVisible = true;
+                    catch (Exception e)
+                    {
+                        Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, e.getLocalizedMessage());
+                    }
                 }
             });
         }

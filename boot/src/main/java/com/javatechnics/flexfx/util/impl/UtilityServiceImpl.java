@@ -21,9 +21,12 @@ import com.javatechnics.flexfx.node.ControllerWrapper;
 import com.javatechnics.flexfx.util.UtilityService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class UtilityServiceImpl implements UtilityService
 {
@@ -52,6 +55,39 @@ public final class UtilityServiceImpl implements UtilityService
         finally
         {
             Thread.currentThread().setContextClassLoader(ccl);
+        }
+    }
+
+    @Override
+    public List<Image> loadBundleImages(final List<String> imageLocations, final Class<?> clazz)
+    {
+        final ClassLoader ccl = Thread.currentThread().getContextClassLoader();
+        final List<Image> images = new ArrayList<>(imageLocations.size());
+        Thread.currentThread().setContextClassLoader(clazz.getClassLoader());
+        try
+        {
+            inflateImages(images, imageLocations);
+        }
+        finally
+        {
+            Thread.currentThread().setContextClassLoader(ccl);
+        }
+
+        return images;
+    }
+
+    private void inflateImages(final List<Image> images, final List<String> imageLocations)
+    {
+        for (final String location : imageLocations)
+        {
+            try
+            {
+                images.add(new Image(location));
+            }
+            catch (Exception exception)
+            {
+                // TODO: Some logging.
+            }
         }
     }
 }

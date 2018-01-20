@@ -18,8 +18,10 @@
 package com.javatechnics.flexfx.util;
 
 import com.javatechnics.flexfx.node.ControllerWrapper;
+import javafx.scene.image.Image;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * OSGi service that offers a safe way to use JavaFx methods that rely on the initialisation of the JavaFx
@@ -35,4 +37,12 @@ public interface UtilityService
      * @throws ClassCastException thrown if the FXML controller cannot be cast to the specified controller class.
      */
     void populateWrapper(ControllerWrapper controllerWrapper, String fxmlFile) throws IOException;
+
+    /**
+     * Loads images that may be private to a bundle and handles switching the thread context classloader.
+     * @param imageLocations a List specifying the image locations within the bundle.
+     * @param clazz a Class within the bundle containing the images.
+     * @return a populated list on Images or empty if none are found.
+     */
+    List<Image> loadBundleImages(List<String> imageLocations, Class<?> clazz);
 }
