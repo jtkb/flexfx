@@ -30,4 +30,4 @@ before_script:
 install: true
 
 # script: mvn clean install -Pintegration,examples
-script: mvn clean verify -Possrh,publish --settings travis/travissettings.xml
+script: mvn clean deploy -Possrh,publish --settings travis/travissettings.xml
