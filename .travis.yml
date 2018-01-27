@@ -21,14 +21,11 @@ before_install:
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
 
 before_script:
-  - ./travis/before_script.sh
+  - . ./travis/before_script.sh
 
 install: true
 
-# script: mvn clean install -Pintegration,examples
-# script: mvn clean deploy -Possrh,publish --settings travis/travissettings.xml
-script:
-  - ./travis/build_script.sh
+script: mvn ${MVN_PHASES} ${MVN_PROFILES} ${MVN_SETTINGS}
 
 after_success:
   - ./travis/cleanup.sh
