@@ -28,7 +28,7 @@ fi
 
 if [ "$TRAVIS_BRANCH" == "dev" ] && [ ${IS_RELEASE} -eq ${FALSE} ]; then
     echo "This is a SNAPSHOT build"
-    mkdir -p ~/.m2
+    mkdir ~/.m2
     cp ${TRAVIS_BUILD_DIR}/travis/settings-security.xml ~/.m2/
     cp ${TRAVIS_BUILD_DIR}/travis/travissettings.xml ~/.m2/settings.xml
 
@@ -41,7 +41,7 @@ fi
 
 if [ "$TRAVIS_BRANCH" == "master" ] && [ ${IS_RELEASE} -eq ${TRUE} ]; then
     echo "This is a release build"
-    mkdir -p ~/.m2
+    mkdir ~/.m2
     cp ${TRAVIS_BUILD_DIR}/travis/settings-security.xml ~/.m2/
     cp ${TRAVIS_BUILD_DIR}/travis/travissettings.xml ~/.m2/settings.xml
 
@@ -57,15 +57,12 @@ if [ "$TRAVIS_BRANCH" == "master" ] && [ ${IS_RELEASE} -eq ${TRUE} ] && [ ${IS_P
     echo "Building MASTER for release"
     export MVN_PHASES="clean deploy"
     export MVN_PROFILES="-Possrh,publish,integration"
-    #export MVN_SETTINGS="--settings travis/travissettings.xml"
 elif [ "$TRAVIS_BRANCH" == "dev" ] && [ ${IS_RELEASE} -eq ${FALSE} ] && [ ${IS_PR} -eq ${FALSE} ]; then
     echo "Building DEV for SNAPSHOT"
     export MVN_PHASES="clean deploy"
     export MVN_PROFILES="-Possrh,publish,integration"
-    #export MVN_SETTINGS="--settings travis/travissettings.xml"
 else
     echo "Doing standard build for ${TRAVIS_BRANCH} branch."
     export MVN_PHASES="clean install"
     export MVN_PROFILES="-Pintegration,examples"
-    #export MVN_SETTINGS=""
 fi
