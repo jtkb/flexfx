@@ -62,6 +62,6 @@ elif [ "$TRAVIS_BRANCH" = 'dev' ] && [ ${IS_RELEASE} -eq ${FALSE} ] && [ ${IS_PR
 else
     echo "Doing standard build for ${TRAVIS_BRANCH} branch."
     export MVN_PHASES="clean install"
-    export MVN_PROFILES=""
+    export MVN_PROFILES="-Pintegration,examples"
     export MVN_SETTINGS=""
 fi
