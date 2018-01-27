@@ -25,7 +25,7 @@ before_script:
 
 install: true
 
-script: mvn ${MVN_PHASES} ${MVN_PROFILES} ${MVN_SETTINGS}
+script: mvn ${MVN_PHASES} ${MVN_PROFILES}
 
 after_success:
   - ./travis/cleanup.sh
