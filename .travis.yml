@@ -3,6 +3,16 @@ language: java
 jdk:
   - oraclejdk8
 
+env:
+  global:
+  - secure: "bX2FnDaFz/4fNnXHLtXYd2AyT2uqbcOnmMM0rjbi8L5mmkrXLvaPP/CbUzW4AfOIkg7sAM1PR46TYYarFFGIAhoXpCCftAlC2B2vWcIWs8GjePRLIineoWOWmcMxE274W+SsDAamOwvOh8nyxzp6IAJtJyPMDcAE8Fe2lV6Kskfr960wA/AXVW7mK5GkBLaZlSGsvYIbcWnVxfjsft+d3teqWhV9Eo1Hz4B4OCOBGkP6ZeeWgZr8hGlu6VDpEDWmEtCFGEHZpNOvjP6odjptPZakbEXNdMDttuqFtFVtn3WwQ+TVt5YTlIr85cfwkDmS2IVshOCG2m48I7c1/4u4YesMfOKF8es5+hvfiaaJ7a7XWGXV7QnQsxvhqGMrnvZu0ftyHMkAuoMZWDZMIhGRw+2CAiUndUZAbW+jy9DzyNLAKpa2oZ1Yq3sL1AWBLgeYX1D0Y4X6rIKZKfkxMyqnj9q0/uA46zmuCN2RKrsYcWtqN7hKULH9WCi1c8eNXxBjpsKWVomOoo7QPMpY7/a+WAmq6ja6YjZXO76dGzzOIWD9q7zPArX9VMXKV7DgImJexoR/AIG+e5YNm5hTVApc5Q6FNHe8kOEv/+b88Tq9N1wVEvI6xwcX9VcZS6eKBfocGF3wcRQ3gm/Iw+L6uqukVvNNAudxXd+rde1cPgF4AvI="
+
+  - secure: "gOvi98FCj4Iq0rxq1ag1vNcrSR3dJ3vyJyLZea0HSD3ybJlSiEmC1tuF73+DzbUbvIiPVGyUj2yhymyLGiU9Mj5SQK0HSNpwXRLCpXRfbeM+HNOcOaftd6BLTpN/aP+6on8Do0NisBmeP+HIlNIhBT5fsWbz9bP/u0pCVxKS1b0QFSKkrO1kBD43eH5Nlprtuxhh0pSYMR7E8cHIt1hvHRGdcoYpGOU17efQrZIW2X0Cy55TDVX1DAxQ7W+Sj5O/UGTfCt0KMjfNWWIbmNC+O1fcfSvHaWcuigBt4yF/RKNui2WqnG1m5Ol/ugmwp65GkS/s+JvMzlBJ/6XwiFk/TtmSGjekZoi2XSLWEUMxe0Q9aBC4dYkixUOc54AqW7obD5h8Wb3EyKUzLeOMLTM3NUcahX33AmOGaFeOpnFELnhmXviwSreH2kroL0itRrATC/cTI7l4RtAWvkVDxxF4H5Psjs+xMKBDOrTsYyRcvnuTjP5XXPaZ7DoQnu2dFjqTSpprYNEGNsZ6nTVvpCoM3n0bxKZh6ZDZC15pKgWGjD5Lrz82ylWaR3lHd/XfNhAInwSx10GsTsH2HUBW7HENSGDf5+uppTVeuxPKSQ4K/7DYKUDDP/XEcYcaBMCEVxZ6tY+yeDG6w7XxWDV2mqsg9Br0T3jGdAa5raSQsn2AV/c="
+
+  - secure: "Cb5ybOezggLp+iJ4j4UrryyFV7R0NGylIsz/8NL2KZ5vyEN8D8XXk0QxD+p8bUefedSYYyPWoj8/Uy6jitb/t9yi9QFD7xt5YsyzC05miarzT1W7f4zMGWc173ySQkgRypLJ/eQrG2DDQjKESBU6Px2NyG1ExrClHb1FXPy9QuBjM7hVDEPoXVmdzNalovVauyv0TAOt0uCNOgsysIo7MYC1zGV4EByncmjGCSvf32sZOOjO/ysoNCrqz+LLilCCigsKTctEzNvmqqSQVAffGXGoZ2rA7yDfrSmQiOIFICcepnUQz1WckcI9hhQOB5xdVFhLiGtjNj7ILRJwMVryNc28GWdOzLLJRrx9q95ryf06k5HFcTpKjFCoZXw8W/+Fdu+VBXsiihXdVHUOrkUiRXeNOjedl9DgXxknhaYIWdEOdJXxSm/sN94AqwOYL7phvjxS8aH3lQoLFpd6U2Vs6wYN++ILWUDr8nRnMY5cTrXLfRwmrHdHJPxwNGGkdl3qcEafSo/W/ovcj5bVN5IKCs2BCVMnA/V5g9kDCFAra1gRtI+f3T/x0PryvyT2oizD/SXD7+siykjrTWRFPQ3yfOks1seoeeCJf+4BE3lGUW1ZdMbXMk32J0FR7AwtjQ2K2vXh4WcqzgE2ayolXC6eEnGMytmFdC6kCfS3NV9WnW4="
+
+  - secure: "TcYp3Drr4k+yBIoURMJ0hYTWMEL6iLUDwO0v/AFXd2wESL8uRwMq9fMqJEnI6dRohqfA+18uqpqCG6lVDfem/utdfBS7yd4kNziDAOhtzCjhXbvePfUmRewL/CDjMzL4niweU5wd0megYY/y7ijZ8LZ/n29ysu1CNuKjHOSaFmZxxJxXRItInMtxA6xnb+8keublNlcVsGeLC/2Q56y+GxWjAiXYodyDOsWnve5THPvnGp4KqUb67VMobeTz62DlO4PcXH5nXRp9wlzu7OFyYa+sDnGzJjfD0biNNT8O5u2Uw8ihn9+78dxBzt8g3LfZt/NnU49UlITIapkadaacfqRoDdGhVPUQ8wnmBRC5F38k0hg3kzqL4F11al8jQaNa0CaxM070NRBJzJHs7oZxu7beMDVyioerH4MD6Y3OSG4vJOxTo/LcyW2xSfnGBbwdAjy/2DxLOyxosvSUp2NOHSfVpISsq3w8SYCeRGyeLYwaUPY8V2RnDpM/fi6Mssc/sUEEwXKubV2yyRyaxRpYsJ87brkRdQZFDwtPexvsvW1AxOg45Fu9tEPFiZN2rwj3p1GQr8+FDDsqWLCs7d9eK9vhtgJUtDYI4ypUvxT7/mBvgCgxbHSPw0HBg+35PGvRKLR/YhbGfW7/5vt0BM/tgqrZro6E4N8KPDhgUmSYdAg="
+
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq xvfb
@@ -10,6 +20,15 @@ before_install:
   - sh -e /etc/init.d/xvfb start
   - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
 
+before_script:
+  - . ./travis/before_script.sh
+
 install: true
 
-script: mvn clean install -Pintegration,examples
+script: mvn ${MVN_PHASES} ${MVN_PROFILES} ${MVN_SETTINGS}
+
+after_success:
+  - ./travis/cleanup.sh
+
+after_failure:
+  - ./travis.cleanup.sh
