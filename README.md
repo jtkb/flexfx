@@ -1,5 +1,9 @@
 ## FlexFX
 
+| Branch | Master | Dev |
+|:--------:|:--------:|:-----:|
+| Build Status | [![Build Status](https://travis-ci.org/jtkb/flexfx.svg?branch=master)](https://travis-ci.org/jtkb/flexfx) | [![Build Status](https://travis-ci.org/jtkb/flexfx.svg?branch=dev)](https://travis-ci.org/jtkb/flexfx)|
+
 FlexFX is the combination on JavaFX with the modularity offered by the OSGi specifications and its implementations.
 Frameworks such as DromblerFX which provide a rich set of GUI widgets and a standard GUI framework. FlexFX doesn't attempt to offer this but instead removes the complexity of handling JavaFX within OSGi but places fewer demands on how you create your FX components and their look.
 

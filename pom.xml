@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.javatechnics.flexfx</groupId>
     <artifactId>flexfx</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
     <name>FlexFX</name>
     <description>FlexFX is a small OSGi-compatible bundle that enables the use of JavaFX within an OSGi framework.
@@ -106,7 +106,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.5</version>
+                    <version>1.6</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>
@@ -114,6 +114,10 @@
                             <goals>
                                 <goal>sign</goal>
                             </goals>
+                            <configuration>
+                                <keyname>${gpg.keyname}</keyname>
+                                <passphraseServerId>gpg.passphrase</passphraseServerId>
+                            </configuration>
                         </execution>
                     </executions>
                 </plugin>
