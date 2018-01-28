@@ -17,6 +17,7 @@
 
 package com.javatechnics.flexfx.it.dummytwo;
 
+import com.javatechnics.flexfx.platform.Toolkit;
 import com.javatechnics.flexfx.scene.SceneService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,8 @@ import javafx.scene.Scene;
 import java.io.IOException;
 
 public class DummyTwoSceneServiceImpl implements SceneService {
+
+    private Toolkit toolkit;
 
     @Override
     public Scene getScene() throws IOException {
@@ -44,4 +47,13 @@ public class DummyTwoSceneServiceImpl implements SceneService {
         return new Scene(parent);
     }
 
+    public Toolkit getToolkit()
+    {
+        return toolkit;
+    }
+
+    public void setToolkit(final Toolkit toolkit)
+    {
+        this.toolkit = toolkit;
+    }
 }

@@ -17,6 +17,7 @@
 
 package com.javatechnics.flexfx.it.dummy;
 
+import com.javatechnics.flexfx.platform.Toolkit;
 import com.javatechnics.flexfx.scene.SceneService;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,6 +28,8 @@ import java.io.IOException;
 
 public class DummySceneServiceImpl implements SceneService
 {
+    private Toolkit toolkit;
+
     private Scene scene = null;
 
     @Override
@@ -53,5 +56,15 @@ public class DummySceneServiceImpl implements SceneService
     @Override
     public StageStyle getPreferredStageStyle() {
         return StageStyle.UNDECORATED;
+    }
+
+    public Toolkit getToolkit()
+    {
+        return toolkit;
+    }
+
+    public void setToolkit(final Toolkit toolkit)
+    {
+        this.toolkit = toolkit;
     }
 }
