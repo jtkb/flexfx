@@ -20,7 +20,7 @@
     <parent>
         <artifactId>parent</artifactId>
         <groupId>com.javatechnics.flexfx</groupId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -36,7 +36,7 @@
         <dependency>
             <groupId>com.javatechnics.flexfx</groupId>
             <artifactId>boot</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.2-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
