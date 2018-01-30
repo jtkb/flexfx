@@ -75,8 +75,6 @@
                 <configuration>
                     <instructions>
                         <Export-Package/>
-                        <!--<Bundle-Activator>DeclarativeServiceExample</Bundle-Activator>-->
-                        <Export-Package />
                     </instructions>
                 </configuration>
             </plugin>
