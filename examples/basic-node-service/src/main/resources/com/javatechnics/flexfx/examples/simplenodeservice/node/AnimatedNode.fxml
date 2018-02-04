@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
-
 <!--
   ~    Licensed under the Apache License, Version 2.0 (the "License");
   ~    you may not use this file except in compliance with the License.
@@ -20,10 +17,13 @@
   ~    @author Kerry Billingham
   -->
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javatechnics.flexfx.examples.simplenodeservice.node.AnimatedNodeController">
-   <children>
-      <Circle fill="DODGERBLUE" layoutX="185.0" layoutY="173.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="DODGERBLUE" layoutX="279.0" layoutY="305.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-      <Circle fill="#ff1f66" layoutX="492.0" layoutY="179.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-   </children>
-</AnchorPane>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+
+<Pane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: red; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javatechnics.flexfx.examples.simplenodeservice.node.AnimatedNodeController">
+    <children>
+        <Circle fx:id="circle1" fill="#ff1f66" layoutX="114.0" layoutY="69.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+        <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="114.0" layoutY="153.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+        <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="114.0" layoutY="244.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+    </children>
+</Pane>

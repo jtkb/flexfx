@@ -20,7 +20,10 @@ package com.javatechnics.flexfx.examples.simplenodeservice.scene;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class SceneServiceController
 {
@@ -28,12 +31,17 @@ public class SceneServiceController
 
     private static final int MAX_CHILD_COUNT = 2;
 
+    private AtomicInteger childCount = new AtomicInteger(0);
+
     @FXML
     private GridPane gridPane;
 
     public void initialize()
     {
-        // TODO: Get the number of allowable children in the gridPane - row * column.
+        for (ColumnConstraints constraint : gridPane.getColumnConstraints())
+        {
+            constraint.setPercentWidth(50.0);
+        }
     }
 
     /**
@@ -47,7 +55,7 @@ public class SceneServiceController
         {
             if (gridPane.getChildren().size() < MAX_CHILD_COUNT)
             {
-                gridPane.getChildren().add(parentNode);
+                gridPane.add(parentNode, childCount.getAndIncrement(), 0);
             }
         });
     }

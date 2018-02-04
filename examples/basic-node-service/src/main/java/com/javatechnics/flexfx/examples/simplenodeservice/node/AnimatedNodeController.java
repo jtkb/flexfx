@@ -18,8 +18,12 @@
 package com.javatechnics.flexfx.examples.simplenodeservice.node;
 
 import com.javatechnics.flexfx.examples.simplenodeservice.controls.ControlsCallback;
+import com.javatechnics.flexfx.examples.simplenodeservice.scene.ShapeAnimator;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.effect.Bloom;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
@@ -41,11 +45,31 @@ public class AnimatedNodeController
     @FXML
     private Circle circle3;
 
-    public void initialise()
+    private ShapeAnimator circle1Animator;
+    private ShapeAnimator circle2Animator;
+    private ShapeAnimator circle3Animator;
+
+    public void initialize()
     {
         circle1.setEffect(new Bloom());
         circle2.setEffect(new Glow());
         circle3.setEffect(new GaussianBlur());
+
+        circle1Animator = new ShapeAnimator(circle1);
+        circle2Animator = new ShapeAnimator(circle2);
+        circle3Animator = new ShapeAnimator(circle3);
+
+        circle1Animator.start();
+        circle2Animator.start();
+        circle3Animator.start();
+
+    }
+
+    public void destroy()
+    {
+        circle1Animator.stop();
+        circle2Animator.stop();
+        circle3Animator.stop();
     }
 
     public void setSpeed(final Integer speed)

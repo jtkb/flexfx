@@ -61,6 +61,11 @@ public class AnimatedNode implements NodeService, EventHandler
         controller = wrapper.getController();
     }
 
+    public void destroy()
+    {
+        controller.destroy();
+    }
+
     public void setUtilityService(final UtilityService utilityService)
     {
         this.utilityService = utilityService;

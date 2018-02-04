@@ -37,7 +37,7 @@
     </reference-list>
 
     <bean id="animatednode" class="com.javatechnics.flexfx.examples.simplenodeservice.node.AnimatedNode" scope="singleton"
-          init-method="initialise" activation="lazy">
+          init-method="initialise" destroy-method="destroy" activation="lazy">
         <property name="utilityService" ref="utilityservice" />
     </bean>
 

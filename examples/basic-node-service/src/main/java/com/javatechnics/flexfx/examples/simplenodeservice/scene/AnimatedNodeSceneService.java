@@ -21,6 +21,8 @@ import com.javatechnics.flexfx.node.ControllerWrapper;
 import com.javatechnics.flexfx.node.NodeService;
 import com.javatechnics.flexfx.scene.SceneService;
 import com.javatechnics.flexfx.util.UtilityService;
+import javafx.beans.property.ObjectProperty;
+import javafx.scene.Camera;
 import javafx.scene.Scene;
 
 import java.io.IOException;

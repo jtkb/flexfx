@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Package private interface implemented by the Controls' OSGi-aware class so that the JavaFx thread aware
+ * Package private interface implemented by the Control's OSGi-aware class so that the JavaFx thread aware
  * controller can notify control changes.
  */
 @FunctionalInterface
@@ -44,8 +44,10 @@ public interface ControlsCallback
         private final String type;
         private final static Map<String, EffectType> map = new HashMap<>(EffectType.values().length);
 
-        static {
-            for (EffectType type : EffectType.values()) {
+        static
+        {
+            for (EffectType type : EffectType.values())
+            {
                 map.put(type.type, type);
             }
         }

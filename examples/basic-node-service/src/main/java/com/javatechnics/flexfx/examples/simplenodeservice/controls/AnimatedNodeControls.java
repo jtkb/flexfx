@@ -95,6 +95,11 @@ public class AnimatedNodeControls implements NodeService, ControlsCallback
         animatedNodeController.setControlsCallback(controlsCallback);
     }
 
+    public void destroy()
+    {
+
+    }
+
     public void setEventAdmin(final EventAdmin eventAdmin)
     {
         this.eventAdmin = eventAdmin;
