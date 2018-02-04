@@ -39,7 +39,7 @@ public class AnimatedNode implements NodeService, EventHandler
         switch (event.getTopic())
         {
             case ControlsCallback.SPEED_SUB_TOPIC:
-                controller.setSpeed(Integer.getInteger(event.getProperty("speed").toString()));
+                controller.setSpeed(Double.valueOf(event.getProperty("speed").toString()));
                 break;
             case ControlsCallback.BLEND_SUB_TOPIC:
                 controller.setEffect(ControlsCallback.EffectType.valueOf(event.getProperty("blend").toString()));

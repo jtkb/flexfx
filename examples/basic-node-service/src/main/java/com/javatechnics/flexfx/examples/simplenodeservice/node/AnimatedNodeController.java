@@ -29,6 +29,9 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.effect.Glow;
 import javafx.scene.shape.Circle;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Controller for the AnimatedNode FXML layout.
  */
@@ -45,14 +48,17 @@ public class AnimatedNodeController
     @FXML
     private Circle circle3;
 
+    List<Circle> circles;
+
     private ShapeAnimator circle1Animator;
     private ShapeAnimator circle2Animator;
     private ShapeAnimator circle3Animator;
 
     public void initialize()
     {
-        circle1.setEffect(new Bloom());
-        circle2.setEffect(new Glow());
+        circles = Arrays.asList(circle1, circle2, circle3);
+        circle1.setEffect(new GaussianBlur());
+        circle2.setEffect(new GaussianBlur());
         circle3.setEffect(new GaussianBlur());
 
         circle1Animator = new ShapeAnimator(circle1);
@@ -72,11 +78,13 @@ public class AnimatedNodeController
         circle3Animator.stop();
     }
 
-    public void setSpeed(final Integer speed)
+    public void setSpeed(final Double speed)
     {
         Platform.runLater(() ->
         {
-            //TODO:
+            circle1Animator.setVelocity(speed);
+            circle2Animator.setVelocity(speed);
+            circle3Animator.setVelocity(speed);
         });
     }
 
@@ -84,7 +92,23 @@ public class AnimatedNodeController
     {
         Platform.runLater(() ->
         {
-            //TODO:
+            for (final Circle circle : circles)
+            {
+                switch (effectType)
+                {
+                    case BLUR:
+                        circle.setEffect(new GaussianBlur());
+                        break;
+                    case BLOOM:
+                        circle.setEffect(new Bloom());
+                        break;
+                    case GLOW:
+                        circle.setEffect(new Glow());
+                        break;
+                    case UNKNOWN:
+                    default:
+                }
+            }
         });
     }
 }

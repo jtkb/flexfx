@@ -22,8 +22,8 @@
 
 <Pane prefHeight="400.0" prefWidth="600.0" style="-fx-border-color: red; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javatechnics.flexfx.examples.simplenodeservice.node.AnimatedNodeController">
     <children>
-        <Circle fx:id="circle1" fill="#ff1f66" layoutX="114.0" layoutY="69.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-        <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="114.0" layoutY="153.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-        <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="114.0" layoutY="244.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+        <Circle fx:id="circle1" blendMode="MULTIPLY" fill="#ff1f66" layoutX="114.0" layoutY="69.0" radius="47.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+        <Circle fx:id="circle3" blendMode="MULTIPLY" fill="DODGERBLUE" layoutX="114.0" layoutY="153.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+        <Circle fx:id="circle2" blendMode="MULTIPLY" fill="DODGERBLUE" layoutX="114.0" layoutY="244.0" radius="67.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
     </children>
 </Pane>

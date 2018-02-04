@@ -17,6 +17,8 @@
 
 package com.javatechnics.flexfx.examples.simplenodeservice.controls;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,6 +49,7 @@ public class AnimatedControlsController
         blur.setOnAction(new EffectEventHandler(ControlsCallback.EffectType.BLUR));
         bloom.setOnAction(new EffectEventHandler(ControlsCallback.EffectType.BLOOM));
         glow.setOnAction(new EffectEventHandler(ControlsCallback.EffectType.GLOW));
+        speedSlider.valueProperty().addListener(new SpeedChangeListener());
     }
 
     void setControlsCallback(final ControlsCallback controlsCallback)
@@ -71,6 +74,16 @@ public class AnimatedControlsController
         public void handle(final ActionEvent event)
         {
             controlsCallback.event(ControlsCallback.NodeEvent.BLEND, effect);
+        }
+    }
+
+    private class SpeedChangeListener implements ChangeListener<Number>
+    {
+
+        @Override
+        public void changed(final ObservableValue<? extends Number> observable, final Number oldValue, final Number newValue)
+        {
+            controlsCallback.event(ControlsCallback.NodeEvent.SPEED, newValue);
         }
     }
 }

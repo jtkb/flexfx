@@ -11,8 +11,9 @@ public class ShapeAnimator extends AnimationTimer
     private Parent parent;
     private double circleRadius;
     private long previousTime;
-    private double velocityX = 220.0 / 1E9;
-    private double velocityY = 220.0 / 1E9;
+    private volatile double velocityX = 220.0 / 1E9;
+    private volatile double velocityY = 220.0 / 1E9;
+    private final Object LOCK_OBJECT = new Object();
 
 
     public ShapeAnimator(final Circle circle)
@@ -25,26 +26,29 @@ public class ShapeAnimator extends AnimationTimer
     @Override
     public void handle(final long now)
     {
-        final double newX = circle.getCenterX() + (velocityX * (now - previousTime));
-        final double newY = circle.getCenterY() + (velocityY * (now - previousTime));
-        circle.setCenterX(circle.getCenterX() + (velocityX * (now - previousTime)));
-        circle.setCenterY(circle.getCenterY() + (velocityY * (now - previousTime)));
-
-        final Bounds parentBounds = parent.getLayoutBounds();
-        final Bounds circleBounds = circle.getBoundsInParent();
-
-        final boolean contains = parentBounds.contains(circleBounds);
-        if (!contains)
+        synchronized (LOCK_OBJECT)
         {
+            final double newX = circle.getCenterX() + (velocityX * (now - previousTime));
+            final double newY = circle.getCenterY() + (velocityY * (now - previousTime));
+            circle.setCenterX(circle.getCenterX() + (velocityX * (now - previousTime)));
+            circle.setCenterY(circle.getCenterY() + (velocityY * (now - previousTime)));
 
-            if (circleBounds.getMinX() <= parentBounds.getMinX() || circleBounds.getMaxX() >= parentBounds.getMaxX())
-            {
-                velocityX *= -1.0;
-            }
+            final Bounds parentBounds = parent.getLayoutBounds();
+            final Bounds circleBounds = circle.getBoundsInParent();
 
-            if (circleBounds.getMinY() <= parentBounds.getMinY() || circleBounds.getMaxY() >= parentBounds.getMaxY())
+            final boolean contains = parentBounds.contains(circleBounds);
+            if (!contains)
             {
-                velocityY *= -1.0;
+
+                if ((circleBounds.getMinX() <= parentBounds.getMinX() ) && velocityX < 0.0 || (circleBounds.getMaxX() >= parentBounds.getMaxX() && velocityX > 0.0))
+                {
+                    velocityX *= -1.0;
+                }
+
+                if ((circleBounds.getMinY() <= parentBounds.getMinY() && velocityY < 0.0) || (circleBounds.getMaxY() >= parentBounds.getMaxY() && velocityY > 0.0))
+                {
+                    velocityY *= -1.0;
+                }
             }
         }
         previousTime = now;
@@ -55,5 +59,14 @@ public class ShapeAnimator extends AnimationTimer
     {
         super.start();
         previousTime = System.nanoTime();
+    }
+
+    public void setVelocity(final double velocity)
+    {
+        synchronized (LOCK_OBJECT)
+        {
+            velocityX = velocityX < 0 ? -1.0 * velocity / 1E9 : velocity / 1E9;
+            velocityY = velocityY < 0 ? -1.0 * velocity / 1E9 : velocity / 1E9;
+        }
     }
 }

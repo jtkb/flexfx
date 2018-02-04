@@ -29,7 +29,7 @@
    <children>
       <HBox alignment="CENTER_LEFT" layoutX="14.0" layoutY="14.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" style="-fx-border-color: blue;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="10.0">
          <children>
-            <Slider fx:id="speedSlider" maxWidth="1.7976931348623157E308" orientation="VERTICAL" prefWidth="100.0" showTickLabels="true" showTickMarks="true" HBox.hgrow="ALWAYS" />
+            <Slider fx:id="speedSlider" majorTickUnit="50.0" max="500.0" maxWidth="1.7976931348623157E308" min="100.0" minorTickCount="1" orientation="VERTICAL" prefWidth="100.0" showTickLabels="true" showTickMarks="true" value="220.0" HBox.hgrow="ALWAYS" />
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
                <children>
                   <RadioButton fx:id="blur" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" selected="true" text="Blur" VBox.vgrow="ALWAYS">

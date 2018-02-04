@@ -62,8 +62,8 @@ public class AnimatedNodeControls implements NodeService, ControlsCallback
                     event = new Event(ControlsCallback.BLEND_SUB_TOPIC, map);
                     break;
                 case SPEED:
-                    final Map<String, Integer> speedMap = new HashMap<>(1);
-                    speedMap.put("speed", Integer.valueOf((String) value));
+                    final Map<String, Double> speedMap = new HashMap<>(1);
+                    speedMap.put("speed", (Double)value);
                     event = new Event(ControlsCallback.SPEED_SUB_TOPIC, speedMap);
                     break;
             }
