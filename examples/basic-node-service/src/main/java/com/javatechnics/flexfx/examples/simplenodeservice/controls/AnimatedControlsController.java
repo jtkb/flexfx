@@ -17,8 +17,6 @@
 
 package com.javatechnics.flexfx.examples.simplenodeservice.controls;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,30 +24,45 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleGroup;
 
+
 /**
  * The controller class for the AnimatedControls FXML layout.
  */
 public class AnimatedControlsController
 {
     public static final String FXML_FILE = "AnimatedControls.fxml";
+
     private ControlsCallback controlsCallback;
+
     @FXML
     private Slider speedSlider;
+
     @FXML
     private ToggleGroup effectToggleGroup;
+
     @FXML
     private RadioButton blur;
+
     @FXML
     private RadioButton bloom;
+
     @FXML
     private RadioButton glow;
 
+    private EventHandler<ActionEvent> radioButtonHandler = event ->
+            controlsCallback.event(ControlsCallback.NodeEvent.BLEND, ((RadioButton) event.getSource()).getUserData());
+
     public void initialize()
     {
-        blur.setOnAction(new EffectEventHandler(ControlsCallback.EffectType.BLUR));
-        bloom.setOnAction(new EffectEventHandler(ControlsCallback.EffectType.BLOOM));
-        glow.setOnAction(new EffectEventHandler(ControlsCallback.EffectType.GLOW));
-        speedSlider.valueProperty().addListener(new SpeedChangeListener());
+        blur.setUserData(ControlsCallback.EffectType.BLUR);
+        bloom.setUserData(ControlsCallback.EffectType.BLOOM);
+        glow.setUserData(ControlsCallback.EffectType.GLOW);
+
+        blur.setOnAction(radioButtonHandler);
+        bloom.setOnAction(radioButtonHandler);
+        glow.setOnAction(radioButtonHandler);
+        speedSlider.valueProperty().addListener(
+                (observable, oldValue, newValue) -> controlsCallback.event(ControlsCallback.NodeEvent.SPEED, newValue));
     }
 
     void setControlsCallback(final ControlsCallback controlsCallback)
@@ -57,33 +70,4 @@ public class AnimatedControlsController
         this.controlsCallback = controlsCallback;
     }
 
-    /**
-     * Private class to handle radio button events. An instance is created for each of the
-     * effect radio buttons.
-     */
-    private class EffectEventHandler implements EventHandler<ActionEvent>
-    {
-        ControlsCallback.EffectType effect;
-
-        public EffectEventHandler(final ControlsCallback.EffectType effect)
-        {
-            this.effect = effect;
-        }
-
-        @Override
-        public void handle(final ActionEvent event)
-        {
-            controlsCallback.event(ControlsCallback.NodeEvent.BLEND, effect);
-        }
-    }
-
-    private class SpeedChangeListener implements ChangeListener<Number>
-    {
-
-        @Override
-        public void changed(final ObservableValue<? extends Number> observable, final Number oldValue, final Number newValue)
-        {
-            controlsCallback.event(ControlsCallback.NodeEvent.SPEED, newValue);
-        }
-    }
 }

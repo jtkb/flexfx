@@ -49,6 +49,8 @@ public class AnimatedNodeControls implements NodeService, ControlsCallback
 
     private UtilityService utilityService = null;
 
+    // ControlsCallback instance that is passed to the FXML Controller. The FXML controller thus remains
+    // OSGi unaware.
     private ControlsCallback controlsCallback = (NodeEvent nodeEvent, Object value) ->
     {
         executorService.execute(() ->
@@ -70,9 +72,6 @@ public class AnimatedNodeControls implements NodeService, ControlsCallback
             eventAdmin.sendEvent(event);
         });
     };
-
-    // TODO: create an implementation of the functional interface ControlsCallback and pass into the FXML controller
-    // class. The implementation will make use of the EventAdmin property above.
 
     @Override
     public Parent getParentNode()

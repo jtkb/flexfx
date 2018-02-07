@@ -1,0 +1,38 @@
+@startuml
+
+package "FlexFX" #Silver{
+[boot]
+}
+
+package "OSGi" #Silver {
+[Compendium] - EventAdmin
+note right of EventAdmin
+AnimatedNodeControls &
+AnimatedNode communicate
+via OSGi EventAdmin
+service
+end note
+}
+
+package "BasicNodeService" #Gold {
+interface "NodeService" as NodeService1
+interface "NodeService" as NodeService2
+[AnimatedNodeSceneService] - SceneService
+[AnimatedNodeSceneService] ..> NodeService1 : optional
+[AnimatedNode] - NodeService1
+[AnimatedNode] --> EventAdmin
+[AnimatedNodeControls] - NodeService2
+[AnimatedNodeSceneService] ..> NodeService2 : optional
+[AnimatedNodeControls] --> EventAdmin
+[boot] --> SceneService
+
+note top of AnimatedNode
+AnimatedNode &
+AnimatedNodeControls
+would typically be in other
+bundles.
+end note
+
+}
+
+@enduml
