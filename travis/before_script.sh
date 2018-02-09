@@ -26,6 +26,13 @@ if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" != 'false' ]; th
         echo "The version ends with -SNAPSHOT."
         exit 1
     fi
+elif [ "$TRAVIS_BRANCH" == "feature/release_1.1.0" ]; then
+    echo "Project Version: ${PROJECT_VERSION}"
+    echo ${PROJECT_VERSION} | grep \\-SNAPSHOT$
+    if [ $? -ne 0 ]; then
+        echo "The version does not end with -SNAPSHOT. Build abort."
+        exit 1
+    fi
 fi
 
 if [ "$TRAVIS_BRANCH" == "dev" ] && [ ${IS_RELEASE} -eq ${FALSE} ]; then
@@ -54,6 +61,19 @@ if [ "$TRAVIS_BRANCH" == "master" ] && [ ${IS_RELEASE} -eq ${TRUE} ]; then
     gpg --fast-import --no-tty ${TRAVIS_BUILD_DIR}/travis/signing.asc &> /dev/null
 fi
 
+if [ "$TRAVIS_BRANCH" == "feature/release_1.1.0" ] && [ ${IS_RELEASE} -eq ${FALSE} ]; then
+    echo "This is a SNAPSHOT build"
+    mkdir ~/.m2
+    cp ${TRAVIS_BUILD_DIR}/travis/settings-security.xml ~/.m2/
+    cp ${TRAVIS_BUILD_DIR}/travis/travissettings.xml ~/.m2/settings.xml
+
+    openssl aes-256-cbc -K $encrypted_259161014934_key -iv $encrypted_259161014934_iv -in ${TRAVIS_BUILD_DIR}/travis/signing.asc.enc -out ${TRAVIS_BUILD_DIR}/travis/signing.asc -d
+
+    openssl aes-256-cbc -K $encrypted_431ce540c668_key -iv $encrypted_431ce540c668_iv -in ${TRAVIS_BUILD_DIR}/travis/encrypt-settings.xml.enc -out ${TRAVIS_BUILD_DIR}/travis/encrypt-settings.xml -d
+
+    gpg --fast-import --no-tty ${TRAVIS_BUILD_DIR}/travis/signing.asc &> /dev/null
+fi
+
 # Configure Maven command line params
 if [ "$TRAVIS_BRANCH" == "master" ] && [ ${IS_RELEASE} -eq ${TRUE} ] && [ ${IS_PR} -eq ${FALSE} ]; then
     echo "Building MASTER for release"
@@ -61,6 +81,10 @@ if [ "$TRAVIS_BRANCH" == "master" ] && [ ${IS_RELEASE} -eq ${TRUE} ] && [ ${IS_P
     export MVN_PROFILES="-Possrh,publish,integration"
 elif [ "$TRAVIS_BRANCH" == "dev" ] && [ ${IS_RELEASE} -eq ${FALSE} ] && [ ${IS_PR} -eq ${FALSE} ]; then
     echo "Building DEV for SNAPSHOT"
+    export MVN_PHASES="clean deploy"
+    export MVN_PROFILES="-Possrh,publish,integration"
+elif [ "$TRAVIS_BRANCH" == "feature/release_1.1.0" ] && [ ${IS_RELEASE} -eq ${FALSE} ] && [ ${IS_PR} -eq ${FALSE} ]; then
+    echo "Building feature/release_1.1.0 for SNAPSHOT"
     export MVN_PHASES="clean deploy"
     export MVN_PROFILES="-Possrh,publish,integration"
 else

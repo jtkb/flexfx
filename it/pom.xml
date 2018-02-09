@@ -30,7 +30,7 @@
     <modules>
         <module>tests</module>
         <module>dummy</module>
-        <module>dummytwo</module>
+        <module>dummy-two</module>
     </modules>
     <properties>
         <project.groupId>${project.groupId}</project.groupId>
