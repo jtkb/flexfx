@@ -168,6 +168,7 @@ public class StageController implements ServiceListener
                         primaryStage.setTitle(sceneService.getTitle());
                         primaryStage.getIcons().clear();
                         primaryStage.getIcons().addAll(sceneService.getIcons());
+                        primaryStage.setResizable(sceneService.isResizeable());
                         primaryStage.show();
                         hasBeenVisible = true;
                     }

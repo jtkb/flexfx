@@ -99,4 +99,13 @@ public interface SceneService
         return FXCollections.unmodifiableObservableList(
                 FXCollections.observableArrayList(Arrays.asList(new Image("/colourwheel.png"))));
     }
+
+    /**
+     * Indicates if this scene is resizeable.
+     * @return TRUE if the scene is resizeable.
+     */
+    default boolean isResizeable()
+    {
+        return true;
+    }
 }
