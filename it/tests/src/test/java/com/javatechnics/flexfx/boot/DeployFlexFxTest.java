@@ -68,9 +68,9 @@ public class DeployFlexFxTest
                 {
                         karafDistributionConfiguration()
                                 .frameworkUrl(KARAF_URL)
-                                .unpackDirectory(new File("target/paxexam/unpack")),
+                                .unpackDirectory(new File(PAX_EXAM_UNPACK_DIR)),
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
-                                new File("src/test/resources/etc/bundleinstall.cfg")),
+                                new File(KARAF_CFG_FILE)),
                         mavenBundle()
                                 .groupId(FLEXFX_GROUP_ID)
                                 .artifactId(FLEXFX_BOOT_ARTIFACT_ID)

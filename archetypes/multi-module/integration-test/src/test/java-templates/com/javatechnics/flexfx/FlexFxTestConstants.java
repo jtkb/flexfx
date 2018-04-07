@@ -23,13 +23,13 @@ import static org.ops4j.pax.exam.CoreOptions.maven;
 
 public final class FlexFxTestConstants
 {
-    public static final String FLEXFX_GROUP_ID = "${project.groupId}";
-    public static final String FLEXFX_BOOT_ARTIFACT_ID = "boot";
+    public static final String FLEXFX_GROUP_ID = "${flexfx.groupId}";
+    public static final String FLEXFX_BOOT_ARTIFACT_ID = "${flexfx.artifactId}";
+    public static final String FLEXFX_VERSION = "${flexfx.version}";
     public static final String KARAF_VERSION = "${karaf.version}";
     public static final String BUNDLE_INSTALL_ACL_CFG = "etc/org.apache.karaf.command.acl.bundle.cfg";
     public static final String IT_DUMMY_BUNDLE_ARTIFACT_ID = "dummy";
     public static final String DUMMY_TWO_BUNDLE_ARTIFACT_ID = "dummy-two";
-    public static final String FLEXFX_VERSION = "${project.version}";
     public static final String TESTFX_GROUP_ID =  "${testfx.groupId}";
     public static final String TESTFX_CORE_ARTIFACT_ID = "${testfx.core.artifactId}";
     public static final String TESTFX_INTERNAL_ARTIFACT_ID = "${testfx.internal.artifactId}";

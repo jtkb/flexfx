@@ -15,7 +15,7 @@
  *    @author Kerry Billingham
  */
 
-package com.javatechnics.flexfx.boot;
+package com.javatechnics.flexfx.archetypes.multi.module;
 
 import javafx.stage.Stage;
 import org.apache.karaf.features.BootFinished;
@@ -41,11 +41,28 @@ import java.io.File;
 import java.io.PrintStream;
 import java.util.concurrent.TimeoutException;
 
-import static com.javatechnics.flexfx.FlexFxTestConstants.*;
-import static org.junit.Assert.*;
+import static com.javatechnics.flexfx.FlexFxTestConstants.BUNDLE_INSTALL_ACL_CFG;
+import static com.javatechnics.flexfx.FlexFxTestConstants.DUMMY_TWO_BUNDLE_ARTIFACT_ID;
+import static com.javatechnics.flexfx.FlexFxTestConstants.FLEXFX_BOOT_ARTIFACT_ID;
+import static com.javatechnics.flexfx.FlexFxTestConstants.FLEXFX_GROUP_ID;
+import static com.javatechnics.flexfx.FlexFxTestConstants.FLEXFX_VERSION;
+import static com.javatechnics.flexfx.FlexFxTestConstants.IT_DUMMY_BUNDLE_ARTIFACT_ID;
+import static com.javatechnics.flexfx.FlexFxTestConstants.KARAF_CFG_FILE;
+import static com.javatechnics.flexfx.FlexFxTestConstants.KARAF_URL;
+import static com.javatechnics.flexfx.FlexFxTestConstants.PAX_EXAM_UNPACK_DIR;
+import static com.javatechnics.flexfx.FlexFxTestConstants.SUN_GLASS_UI_PACKAGE;
+import static com.javatechnics.flexfx.FlexFxTestConstants.TESTFX_CORE_ARTIFACT_ID;
+import static com.javatechnics.flexfx.FlexFxTestConstants.TESTFX_GROUP_ID;
+import static com.javatechnics.flexfx.FlexFxTestConstants.TESTFX_INTERNAL_ARTIFACT_ID;
+import static com.javatechnics.flexfx.FlexFxTestConstants.TESTFX_VERSION;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.systemPackage;
-import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.replaceConfigurationFile;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.hasText;
 
@@ -86,14 +103,11 @@ public class TFxTest
                         mavenBundle()
                                 .groupId(FLEXFX_GROUP_ID)
                                 .artifactId(FLEXFX_BOOT_ARTIFACT_ID)
-                                .versionAsInProject(),
-                        mavenBundle()
-                                .groupId(FLEXFX_GROUP_ID)
-                                .artifactId(IT_DUMMY_BUNDLE_ARTIFACT_ID)
-                                .versionAsInProject(),
+                                .version(FLEXFX_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
-                        logLevel(LogLevelOption.LogLevel.INFO)
+                        logLevel(LogLevelOption.LogLevel.INFO),
+
                 };
     }
 
@@ -116,39 +130,6 @@ public class TFxTest
     public void testStageAvailable()
     {
         assertNotNull("Primary stage is null", primaryStage);
-    }
-
-    @Test
-    public void testButtonAvailable()
-    {
-        verifyThat("#button", hasText("Button"));
-    }
-
-    /**
-     * Ensures that if a second SceneService is deployed, that is it not loaded into the Stage.
-     */
-    @Test
-    public void testSecondSceneServiceNotSelected() throws Exception
-    {
-        final String installDummyBundleTwoCommand = "bundle:install mvn:"
-                + FLEXFX_GROUP_ID + "/"
-                + DUMMY_TWO_BUNDLE_ARTIFACT_ID + "/"
-                + FLEXFX_VERSION;
-        // Ensure the dummy bundle two is not installed.
-        Bundle dummyTwoBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + DUMMY_TWO_BUNDLE_ARTIFACT_ID);
-        assertNull("Dummy Bundle Two found to be already deployed.", dummyTwoBundle);
-
-        session.execute(installDummyBundleTwoCommand);
-
-        dummyTwoBundle = getInstalledBundle(FLEXFX_GROUP_ID + "." + DUMMY_TWO_BUNDLE_ARTIFACT_ID);
-        assertNotNull("Dummy Bundle Two was not installed.", dummyTwoBundle);
-        if (dummyTwoBundle.getState() != Bundle.ACTIVE)
-        {
-            dummyTwoBundle.start();
-        }
-        assertEquals("Dummy Two bundle not active.", Bundle.ACTIVE, dummyTwoBundle.getState());
-        dummyTwoBundle.uninstall();
-
     }
 
     private Bundle getInstalledBundle(final String bundleSymbolicName)

@@ -59,10 +59,10 @@ public class FlexFxFailureTest
                 {
                         karafDistributionConfiguration()
                                 .frameworkUrl(KARAF_URL)
-                                .unpackDirectory(new File("target/paxexam/unpack")),
+                                .unpackDirectory(new File(PAX_EXAM_UNPACK_DIR)),
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
-                                new File("src/test/resources/etc/bundleinstall.cfg")),
-                        systemPackage("com.sun.glass.ui"),
+                                new File(KARAF_CFG_FILE)),
+                        systemPackage(SUN_GLASS_UI_PACKAGE),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
                         logLevel(LogLevelOption.LogLevel.INFO)
