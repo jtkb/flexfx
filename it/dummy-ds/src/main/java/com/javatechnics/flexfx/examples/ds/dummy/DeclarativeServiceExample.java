@@ -1,4 +1,4 @@
-package com.javatechnics.flexfx.examples.ds;
+package com.javatechnics.flexfx.examples.ds.dummy;
 
 import com.javatechnics.flexfx.examples.ds.dummy.fxml.DSController;
 import com.javatechnics.flexfx.node.ControllerWrapper;

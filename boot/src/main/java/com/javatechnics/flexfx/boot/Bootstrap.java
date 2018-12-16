@@ -20,10 +20,14 @@ package com.javatechnics.flexfx.boot;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+import lombok.extern.slf4j.Slf4j;
+
+import static com.javatechnics.flexfx.boot.JavaFxExceptionMessages.JAVAFX_UNCAUGHT_EXCEPTION;
 
 /**
  * Bundle private class that starts the JavaFx thread, returning the Stage object to the OSGi visible calling class.
  */
+@Slf4j
 public class Bootstrap extends Application
 {
 
@@ -40,6 +44,22 @@ public class Bootstrap extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        final Thread fxThread = Thread.currentThread();
+        if (Platform.isFxApplicationThread())
+        {
+            fxThread.setUncaughtExceptionHandler((t, e) -> {
+                final ClassLoader currentClassLoader = t.getContextClassLoader();
+                try
+                {
+                    Thread.currentThread().setContextClassLoader(Bootstrap.class.getClassLoader());
+                    log.error(JAVAFX_UNCAUGHT_EXCEPTION, e);
+                }
+                finally
+                {
+                    Thread.currentThread().setContextClassLoader(currentClassLoader);
+                }
+            });
+        }
         Bootstrap.primaryStage = primaryStage;
         FlexFXBundle.setStage(primaryStage, !IS_FX_THREAD_RESTART);
     }
