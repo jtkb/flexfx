@@ -25,7 +25,7 @@ public final class FlexFxTestConstants
 {
     public static final String FLEXFX_GROUP_ID = "${project.groupId}";
     public static final String FLEXFX_BOOT_ARTIFACT_ID = "boot";
-    public static final String KARAF_VERSION = "${karaf.version}";
+    public static final String KARAF_VERSION = "${org.apache.karaf.version}";
     public static final String BUNDLE_INSTALL_ACL_CFG = "etc/org.apache.karaf.command.acl.bundle.cfg";
     public static final String IT_DUMMY_BUNDLE_ARTIFACT_ID = "dummy";
     public static final String DUMMY_TWO_BUNDLE_ARTIFACT_ID = "dummy-two";

@@ -43,6 +43,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>properties-maven-plugin</artifactId>
+                <version>${properties.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>initialize</phase>
@@ -59,6 +60,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>${maven.source.plugin.version}</version>
                 <configuration>
                     <skipSource>true</skipSource>
                 </configuration>
@@ -68,6 +70,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven.javadoc.plugin.version}</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>
@@ -77,6 +80,7 @@
             <plugin>
                 <artifactId>maven-deploy-plugin</artifactId>
                 <groupId>org.apache.maven.plugins</groupId>
+                <version>${maven.deploy.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <skip>true</skip>
@@ -87,6 +91,7 @@
             <plugin>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <groupId>org.apache.maven.plugins</groupId>
+                <version>${maven.gpg.plugin.version}</version>
                 <configuration>
                     <skip>true</skip>
                 </configuration>

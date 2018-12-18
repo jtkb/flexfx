@@ -11,17 +11,12 @@
     <packaging>bundle</packaging>
 
     <name>FlexFX :: examples :: ds-example</name>
-    <url>http://maven.apache.org</url>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.service.component.annotations</artifactId>
-            <version>1.3.0</version>
+            <version>${org.osgi.service.component.annotations.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -29,29 +24,9 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-                <version>1.25.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.felix</groupId>
-                        <artifactId>org.apache.felix.scr.annotations</artifactId>
-                        <version>1.12.0</version>
-                    </dependency>
-                </dependencies>
-                <executions>
-                    <execution>
-                        <id>generate-scr-descriptor</id>
-                        <goals>
-                            <goal>scr</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.karaf.tooling</groupId>
                 <artifactId>karaf-maven-plugin</artifactId>
-                <version>4.0.7</version>
+                <version>${karaf.maven.plugin.version}</version>
                 <extensions>true</extensions>
                 <executions>
                     <execution>
@@ -70,13 +45,11 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${maven.bundle.plugin.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
                         <Export-Package/>
-                        <!--<Bundle-Activator>DeclarativeServiceExample</Bundle-Activator>-->
-                        <Export-Package />
                     </instructions>
                 </configuration>
             </plugin>
