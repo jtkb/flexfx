@@ -19,22 +19,26 @@ package com.javatechnics.flexfx.boot;
 
 import com.javatechnics.flexfx.platform.Toolkit;
 import com.javatechnics.flexfx.stage.controller.StageController;
-import com.javatechnics.flexfx.util.impl.UtilityServiceImpl;
 import com.javatechnics.flexfx.util.UtilityService;
+import com.javatechnics.flexfx.util.impl.UtilityServiceImpl;
 import javafx.stage.Stage;
-import org.osgi.framework.*;
+import lombok.extern.slf4j.Slf4j;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.BundleException;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceRegistration;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * This is the created by the OSGi framework and triggers the starting of the JavaFx thread.
  * It essentially acts as a coordinator between the OSGi framework and the JavaFx thread.
  */
+@Slf4j
 public class FlexFXBundle implements BundleActivator
 {
 
@@ -45,8 +49,6 @@ public class FlexFXBundle implements BundleActivator
     public static final String STARTING_JAVAFX_THREAD = "Starting JavaFx thread.";
 
     public static final long JAVAFX_THREAD_STARTUP_TIMEOUT = 5;
-
-    private static final String LOGGER_NAME = "com.javatechnics.flexfx";
 
     private static final CountDownLatch javaFxStartup = new CountDownLatch(1);
 
@@ -92,7 +94,7 @@ public class FlexFXBundle implements BundleActivator
             Bootstrap.startMe();
 
         }).start();
-        Logger.getLogger(LOGGER_NAME).log(Level.INFO, STARTING_JAVAFX_THREAD);
+        log.info(STARTING_JAVAFX_THREAD);
         javaFxStartup.await(JAVAFX_THREAD_STARTUP_TIMEOUT, TimeUnit.SECONDS);
         if (FX_THREAD_STARTED.get())
         {
@@ -106,14 +108,14 @@ public class FlexFXBundle implements BundleActivator
             final BundleException bundleException;
             if (startupException != null)
             {
-                Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_FAILED);
                 bundleException = new BundleException(startupException.getMessage());
                 bundleException.initCause(startupException);
+                log.error(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_FAILED);
             }
             else
             {
-                Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
                 bundleException = new BundleException(String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
+                log.error(String.format(JavaFxExceptionMessages.JAVAFX_THREAD_STARTUP_TIMEOUT, JAVAFX_THREAD_STARTUP_TIMEOUT));
             }
             throw bundleException;
         }
@@ -136,7 +138,7 @@ public class FlexFXBundle implements BundleActivator
             }
             stageController.stop();
             stageController = null;
-            Logger.getLogger(LOGGER_NAME).log(Level.INFO, "Stopped StageController");
+            log.info("Stopped StageController.");
         }
     }
 
@@ -158,14 +160,14 @@ public class FlexFXBundle implements BundleActivator
             try
             {
                 stageController.start(isFxThreadRestart);
-                Logger.getLogger(LOGGER_NAME).log(Level.INFO, "Started StageController.");
                 FX_THREAD_STARTED.set(Boolean.TRUE);
+                log.info("Started StageController.");
             }
             catch (InvalidSyntaxException e)
             {
-                Logger.getLogger(LOGGER_NAME).log(Level.SEVERE, e.getMessage());
                 stageController.stop();
                 stageController = null;
+                log.error("Exception when setting Stage object into FlexFXBundle.", e);
             }
             finally
             {

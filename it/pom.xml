@@ -31,6 +31,7 @@
         <module>tests</module>
         <module>dummy</module>
         <module>dummy-two</module>
+        <module>dummy-ds</module>
     </modules>
     <properties>
         <project.groupId>${project.groupId}</project.groupId>

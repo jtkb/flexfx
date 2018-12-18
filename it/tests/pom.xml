@@ -36,6 +36,7 @@
         <org.apache.karaf.log.version>${org.apache.karaf.version}</org.apache.karaf.log.version>
         <org.apache.karaf.features.core.version>${org.apache.karaf.version}</org.apache.karaf.features.core.version>
         <org.apache.karaf.shell.core.version>${org.apache.karaf.version}</org.apache.karaf.shell.core.version>
+        <org.apache.karaf.features.standard.version>${org.apache.karaf.version}</org.apache.karaf.features.standard.version>
 
         <pax.exam.version>4.11.0</pax.exam.version>
         <pax.exam.container.karaf.version>${pax.exam.version}</pax.exam.container.karaf.version>
@@ -50,6 +51,7 @@
         <testfx.core.artifactId>testfx-core</testfx.core.artifactId>
         <testfx.internal.java8.artifactId>testfx-internal-java8</testfx.internal.java8.artifactId>
         <testfx.internal.java9.artifactId>testfx-internal-java9</testfx.internal.java9.artifactId>
+        <testfx.junit.artifactId>testfx-junit</testfx.junit.artifactId>
         <testfx.version>4.0.10-alpha</testfx.version>
 
         <!-- Plugin Versions -->
@@ -126,6 +128,14 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>standard</artifactId>
+            <version>${org.apache.karaf.features.standard.version}</version>
+            <type>xml</type>
+            <classifier>features</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.javatechnics.flexfx</groupId>
             <artifactId>dummy</artifactId>
             <version>${project.version}</version>
@@ -137,6 +147,11 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>com.javatechnics.flexfx</groupId>
+            <artifactId>dummy-ds</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>${testfx.groupId}</groupId>
             <artifactId>testfx-core</artifactId>
             <version>${testfx.version}</version>
@@ -145,6 +160,12 @@
         <dependency>
             <groupId>${testfx.groupId}</groupId>
             <artifactId>${testfx.internal.java8.artifactId}</artifactId>
+            <version>${testfx.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>${testfx.groupId}</groupId>
+            <artifactId>${testfx.junit.artifactId}</artifactId>
             <version>${testfx.version}</version>
             <scope>test</scope>
         </dependency>
