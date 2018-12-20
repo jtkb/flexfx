@@ -41,6 +41,7 @@ import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.CoreOptions.systemPackage;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.features;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.karafDistributionConfiguration;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.keepRuntimeFolder;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.logLevel;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.replaceConfigurationFile;
 
@@ -96,7 +97,8 @@ public class FlexFxLoggingTest
                         logLevel(LogLevelOption.LogLevel.ERROR),
                         features(mavenBundle().groupId("org.apache.karaf.features")
                                 .artifactId("standard").type("xml").classifier("features")
-                                .versionAsInProject(), "scr")
+                                .versionAsInProject(), "scr"),
+                        keepRuntimeFolder()
                 };
     }
 
