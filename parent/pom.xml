@@ -46,8 +46,8 @@
         <slf4j.api.version>1.7.25</slf4j.api.version>
 
         <!-- Configuration Properties -->
-        <source.version>1.8</source.version>
-        <target.version>1.8</target.version>
+        <source.version>9</source.version>
+        <target.version>9</target.version>
 
         <!-- Test Versions -->
         <junit.version>4.12</junit.version>
@@ -111,8 +111,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
                 <configuration>
-                    <source>1.9</source>
-                    <target>1.9</target>
+                    <source>9</source>
+                    <target>9</target>
                 </configuration>
             </plugin>
         </plugins>

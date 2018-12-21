@@ -49,8 +49,6 @@
 
         <testfx.groupId>org.testfx</testfx.groupId>
         <testfx.core.artifactId>testfx-core</testfx.core.artifactId>
-        <testfx.internal.java8.artifactId>testfx-internal-java8</testfx.internal.java8.artifactId>
-        <testfx.internal.java9.artifactId>testfx-internal-java9</testfx.internal.java9.artifactId>
         <testfx.junit.artifactId>testfx-junit</testfx.junit.artifactId>
         <testfx.version>4.0.10-alpha</testfx.version>
 
