@@ -31,7 +31,7 @@
         <!-- Dependency Versions -->
         <geronimo.atinject.version>1.0</geronimo.atinject.version>
 
-        <org.apache.karaf.version>4.2.1</org.apache.karaf.version>
+        <org.apache.karaf.version>4.2.2</org.apache.karaf.version>
         <org.apache.karaf.log.version>${org.apache.karaf.version}</org.apache.karaf.log.version>
         <org.apache.karaf.features.core.version>${org.apache.karaf.version}</org.apache.karaf.features.core.version>
         <org.apache.karaf.shell.core.version>${org.apache.karaf.version}</org.apache.karaf.shell.core.version>

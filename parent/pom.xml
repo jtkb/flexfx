@@ -32,21 +32,21 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- Plugin Versions -->
-        <karaf.maven.plugin.version>4.2.1</karaf.maven.plugin.version>
-        <maven.bundle.plugin.version>3.5.1</maven.bundle.plugin.version>
-        <maven.compiler.plugin.version>3.7.0</maven.compiler.plugin.version>
+        <karaf.maven.plugin.version>4.2.2</karaf.maven.plugin.version>
+        <maven.bundle.plugin.version>4.1.0</maven.bundle.plugin.version>
+        <maven.compiler.plugin.version>3.8.0</maven.compiler.plugin.version>
         <properties.maven.plugin.version>1.0.0</properties.maven.plugin.version>
 
         <!-- Dependency Versions -->
         <lombok.version>1.18.4</lombok.version>
+        <org.openjfx.version>11-ea+25</org.openjfx.version>
         <org.osgi.core.version>4.3.1</org.osgi.core.version>
         <org.osgi.compendium.version>4.3.1</org.osgi.compendium.version>
         <org.osgi.service.component.annotations.version>1.3.0</org.osgi.service.component.annotations.version>
         <slf4j.api.version>1.7.25</slf4j.api.version>
 
         <!-- Configuration Properties -->
-        <source.version>11</source.version>
-        <target.version>11</target.version>
+        <java.release.version>11</java.release.version>
 
         <!-- Test Versions -->
         <junit.version>4.12</junit.version>
@@ -77,6 +77,23 @@
             <version>${lombok.version}</version>
         </dependency>
 
+        <!-- JavaFX Dependencies -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>${org.openjfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>${org.openjfx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>${org.openjfx.version}</version>
+        </dependency>
+
         <!-- Test Dependencies -->
         <dependency>
             <groupId>junit</groupId>
@@ -94,8 +111,7 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>${maven.compiler.plugin.version}</version>
                     <configuration>
-                        <source>${source.version}</source>
-                        <target>${target.version}</target>
+                        <release>${java.release.version}</release>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -103,16 +119,23 @@
                     <artifactId>properties-maven-plugin</artifactId>
                     <version>${properties.maven.plugin.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>${maven.bundle.plugin.version}</version>
+                    <extensions>true</extensions>
+                    <configuration>
+                        <instructions>
+                            <javase>${java.release.version}</javase>
+                        </instructions>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.plugin.version}</version>
-                <configuration>
-                    <source>${source.version}</source>
-                    <target>${target.version}</target>
-                </configuration>
             </plugin>
         </plugins>
     </build>
