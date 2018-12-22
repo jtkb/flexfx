@@ -92,7 +92,6 @@ public class FlexFxLoggingTest
                                 .versionAsInProject(),
                         mavenBundle().groupId(FLEXFX_GROUP_ID).artifactId(DUMMY_DS_BUNDLE_ARTIFACT_ID).versionAsInProject(),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
-                        mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_JUNIT_ARTIFACT_ID, TESTFX_VERSION),
                         logLevel(LogLevelOption.LogLevel.ERROR),
                         features(mavenBundle().groupId("org.apache.karaf.features")
