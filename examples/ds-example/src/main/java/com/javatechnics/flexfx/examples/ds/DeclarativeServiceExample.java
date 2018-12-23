@@ -1,6 +1,6 @@
 package com.javatechnics.flexfx.examples.ds;
 
-import com.javatechnics.flexfx.examples.ds.dummy.fxml.DSController;
+import com.javatechnics.flexfx.examples.ds.fxml.DSController;
 import com.javatechnics.flexfx.node.ControllerWrapper;
 import com.javatechnics.flexfx.scene.SceneService;
 import com.javatechnics.flexfx.util.UtilityService;

@@ -1,4 +1,4 @@
-package com.javatechnics.flexfx.examples.ds.dummy.fxml;
+package com.javatechnics.flexfx.examples.ds.fxml;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,10 +17,11 @@ public class DSController
     @FXML
     private Button buttonThree;
 
+    @FXML
     private TextArea textArea;
 
     public void initialize()
     {
-        buttonOne.setOnAction(event -> textArea.appendText("hello"));
+        buttonOne.setOnAction(event -> textArea.appendText("Hello World!"));
     }
 }

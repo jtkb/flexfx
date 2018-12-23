@@ -20,3 +20,9 @@ JavaFX isn't OSGi-friendly 'out of the box'. That is it was never designed with 
 
 #### Examples
 Code examples can be found [here](examples/README.md)
+
+#### Java 11 & OpenJFX Support
+As of Java 11 JavaFX is no longer provided as part of the JDK. It is now available as separate modules under the OpenJFX which need to be installed as an additional step. Installation can be done in a couple of ways:
+
+1. As part of the Java runtime installation.
+2. As part of the OSGi container installation. For example for apache Karaf 4.2.2 this means placing the JAR files in the `lib/jdk9plus` folder. By default the system bundle exports all the modules.

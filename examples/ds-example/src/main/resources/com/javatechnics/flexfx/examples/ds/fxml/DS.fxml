@@ -21,7 +21,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
-            <TextArea prefHeight="200.0" prefWidth="200.0" />
+            <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" />
          </items></SplitPane>
    </children>
 </AnchorPane>
