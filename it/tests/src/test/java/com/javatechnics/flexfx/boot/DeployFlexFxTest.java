@@ -27,6 +27,8 @@ import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.ops4j.pax.exam.karaf.options.LogLevelOption;
+import org.ops4j.pax.exam.options.BootClasspathLibraryOption;
+import org.ops4j.pax.exam.options.extra.VMOption;
 import org.ops4j.pax.exam.spi.reactors.ExamReactorStrategy;
 import org.ops4j.pax.exam.spi.reactors.PerClass;
 import org.osgi.framework.Bundle;
@@ -40,6 +42,8 @@ import java.io.PrintStream;
 import static com.javatechnics.flexfx.FlexFxTestConstants.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.ops4j.pax.exam.CoreOptions.bootClasspathLibraries;
+import static org.ops4j.pax.exam.CoreOptions.maven;
 import static org.ops4j.pax.exam.CoreOptions.mavenBundle;
 import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 
@@ -71,10 +75,15 @@ public class DeployFlexFxTest
                                 .unpackDirectory(new File("target/paxexam/unpack")),
                         replaceConfigurationFile(BUNDLE_INSTALL_ACL_CFG,
                                 new File("src/test/resources/etc/bundleinstall.cfg")),
+                        //TODO: This is a work-in-progress which doesn't currently work in PAX exam test but
+                        // the following command line options can be used to in the karaf shell file to include openJFX
+                        new VMOption("-p"), new VMOption("<path to OpenJFX library>/javafx-sdk-11.0.1/lib"),
+                        new VMOption("--add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics"),
                         mavenBundle()
                                 .groupId(FLEXFX_GROUP_ID)
                                 .artifactId(FLEXFX_BOOT_ARTIFACT_ID)
-                                .versionAsInProject(),
+                                .version("2.0.0-SNAPSHOT"),
+                        keepRuntimeFolder(),
                         logLevel(LogLevelOption.LogLevel.INFO)
                 };
     }

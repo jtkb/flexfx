@@ -37,7 +37,7 @@
         <org.apache.karaf.shell.core.version>${org.apache.karaf.version}</org.apache.karaf.shell.core.version>
         <org.apache.karaf.features.standard.version>${org.apache.karaf.version}</org.apache.karaf.features.standard.version>
 
-        <pax.exam.version>4.12.0</pax.exam.version>
+        <pax.exam.version>4.13.0</pax.exam.version>
         <pax.exam.container.karaf.version>${pax.exam.version}</pax.exam.container.karaf.version>
         <pax.exam.junit4.version>${pax.exam.version}</pax.exam.junit4.version>
         <pax.logging.api.version>1.8.0</pax.logging.api.version>
