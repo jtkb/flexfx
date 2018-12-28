@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.javatechnics.flexfx</groupId>
     <artifactId>flexfx</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>pom</packaging>
     <name>FlexFX</name>
     <description>FlexFX is a small OSGi-compatible bundle that enables the use of JavaFX within an OSGi framework.
@@ -58,6 +58,12 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+    <properties>
+        <maven.source.plugin.version>2.2.1</maven.source.plugin.version>
+        <maven.javadoc.plugin.version>2.9.1</maven.javadoc.plugin.version>
+        <maven.deploy.plugin.version>2.8.2</maven.deploy.plugin.version>
+        <maven.gpg.plugin.version>1.6</maven.gpg.plugin.version>
+    </properties>
     <build>
         <pluginManagement>
             <plugins>
@@ -65,7 +71,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>
-                    <version>2.2.1</version>
+                    <version>${maven.source.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>attach-sources</id>
@@ -76,11 +82,11 @@
                     </executions>
                 </plugin>
 
-                <!-- Javadoc - Active by default. A-->
+                <!-- Javadoc - Active by default. -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.9.1</version>
+                    <version>${maven.javadoc.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>attach-javadocs</id>
@@ -93,9 +99,9 @@
 
                 <!-- Deploy - Active by default. -->
                 <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <version>2.8.2</version>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven.deploy.plugin.version}</version>
                     <extensions>true</extensions>
                     <configuration>
                         <deployAtEnd>true</deployAtEnd>
@@ -106,7 +112,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-gpg-plugin</artifactId>
-                    <version>1.6</version>
+                    <version>${maven.gpg.plugin.version}</version>
                     <executions>
                         <execution>
                             <id>sign-artifacts</id>

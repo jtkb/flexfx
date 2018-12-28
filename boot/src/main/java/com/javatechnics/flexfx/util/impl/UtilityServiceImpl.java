@@ -43,7 +43,7 @@ public final class UtilityServiceImpl implements UtilityService
             controllerField.set(wrapper, wrapper.getControllerClass().cast(loader.getController()));
             parentNodeField.set(wrapper, parentNode);
         }
-        catch (IllegalAccessException | NoSuchFieldException exception)
+        catch (Exception exception)
         {
             // Safe to capture here as in full control of the ControllerWrapper source and hence field access and
             // field availability. We should never arrive here, at least not in production.
