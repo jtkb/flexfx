@@ -93,6 +93,9 @@ public class TFxTest
                                 .versionAsInProject(),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_CORE_ARTIFACT_ID, TESTFX_VERSION),
                         mavenBundle(TESTFX_GROUP_ID, TESTFX_INTERNAL_ARTIFACT_ID, TESTFX_VERSION),
+                        features(mavenBundle().groupId("org.apache.karaf.features")
+                                .artifactId("standard").type("xml").classifier("features")
+                                .versionAsInProject(), "aries-blueprint"),
                         logLevel(LogLevelOption.LogLevel.INFO)
                 };
     }
