@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.javatechnics.flexfx</groupId>
     <artifactId>flexfx</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>FlexFX</name>
     <description>FlexFX is a small OSGi-compatible bundle that enables the use of JavaFX within an OSGi framework.
